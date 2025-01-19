@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { ConfigService } from '@nestjs/config';
+import { JwtPayload } from '@app/common/graphql/gateway/payload';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -15,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(req: Request, payload: any) {
-    return { userId: payload.sub, username: payload.username };
+  async validate(req: Request, payload: JwtPayload) {
+    return { id: payload.sub, username: payload.username };
   }
 }

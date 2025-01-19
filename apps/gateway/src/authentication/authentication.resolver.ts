@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthenticationService } from './authentication.service';
 import { CreateUserGQLInput } from '../../../../libs/common/src/graphql/gateway/inputs/create-user-input';
 import { AuthenticationResponseGQLEntityType } from '@app/common/graphql/gateway/models/authentication.model';
@@ -8,11 +8,6 @@ import { InvalidCredentialsGQLError } from '@app/common/graphql/gateway/errors/i
 @Resolver()
 export class AuthenticationResolver {
   constructor(private readonly authenticationService: AuthenticationService) {}
-
-  @Query(() => String)
-  async hello() {
-    return 'Hello, world!';
-  }
 
   @Mutation(() => AuthenticationResponseGQLEntityType)
   async createUser(@Args('input') input: CreateUserGQLInput) {

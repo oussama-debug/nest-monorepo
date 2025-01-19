@@ -4,8 +4,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 
-import { GatewayController } from './gateway.controller';
-import { GatewayService } from './gateway.service';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CustomerModule } from './customer/customer.module';
 
@@ -35,7 +33,7 @@ import { CustomerModule } from './customer/customer.module';
     AuthenticationModule,
     CustomerModule,
   ],
-  controllers: [GatewayController],
-  providers: [GatewayService],
+  controllers: [],
+  providers: [],
 })
 export class GatewayModule {}

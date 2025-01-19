@@ -32,7 +32,7 @@ export class AuthenticationResponseGQLEntityType {
 }
 
 export abstract class IQuery {
-    abstract hello(): string | Promise<string>;
+    abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
 }
 
 export abstract class IMutation {

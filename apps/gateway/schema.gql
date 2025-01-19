@@ -15,7 +15,7 @@ type AuthenticationResponseGQLEntityType {
 }
 
 type Query {
-  hello: String!
+  me: UserGQLEntityType!
 }
 
 type Mutation {
