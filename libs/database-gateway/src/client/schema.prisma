@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator typegraphql {
+  provider                    = "node ../../node_modules/prisma-nestjs-graphql"
+  output                      = "../src/graphql"
+  useInputType_WhereInput_ALL = "WhereInput"
+  emitSingle                  = true
+  emitCompleteMock            = true
+  fields_Validator_from       = "class-validator"
+  fields_Validator_input      = true
+  useInputType_UpdateMany_ALL = "UpdateManyInput"
+}
+
+model users {
+  id                  String   @id @default(uuid()) @db.Uuid
+  createdAt           DateTime @default(now()) @db.Timestamptz
+  username            String   @unique
+  password            String
+  country             String   @default("CA")
+  stripeCustomerId    String?
+  hasVerifiedIdentity Boolean  @default(false)
+
+  memberships memberships[]
+}
+
+model memberships {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt
+
+  user        users?      @relation(fields: [userId], references: [id])
+  workspace   workspaces? @relation(fields: [workspaceId], references: [id])
+  userId      String?     @db.Uuid
+  workspaceId String?     @db.Uuid
+}
+
+model workspaces {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt
+  subdomain String   @unique
+  reference String   @unique
+
+  memberships memberships[]
+}

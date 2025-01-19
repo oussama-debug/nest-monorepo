@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserGQLEntityType {
+  id: ID!
+  username: String!
+  password: String!
+  country: String!
+}
+
+type Query {
+  hello: String!
+}
+
+type Mutation {
+  createUser(input: CreateUserGQLInput!): UserGQLEntityType!
+}
+
+input CreateUserGQLInput {
+  username: String!
+  password: String!
+}
