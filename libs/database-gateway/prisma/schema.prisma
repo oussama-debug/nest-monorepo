@@ -8,18 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-generator typegraphql {
-  provider                    = "node ../../node_modules/prisma-nestjs-graphql"
-  output                      = "../src/graphql"
-  useInputType_WhereInput_ALL = "WhereInput"
-  emitSingle                  = true
-  emitCompleteMock            = true
-  fields_Validator_from       = "class-validator"
-  fields_Validator_input      = true
-  useInputType_UpdateMany_ALL = "UpdateManyInput"
+generator nestgraphql {
+  provider = "node ../../node_modules/prisma-nestjs-graphql"
+  output   = "../src/graphql"
 }
 
-model users {
+model User {
   id                  String   @id @default(uuid()) @db.Uuid
   createdAt           DateTime @default(now()) @db.Timestamptz
   username            String   @unique
@@ -28,26 +22,32 @@ model users {
   stripeCustomerId    String?
   hasVerifiedIdentity Boolean  @default(false)
 
-  memberships memberships[]
+  memberships Membership[]
+
+  @@map("users")
 }
 
-model memberships {
+model Membership {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now()) @db.Timestamptz
   updatedAt DateTime @default(now()) @updatedAt
 
-  user        users?      @relation(fields: [userId], references: [id])
-  workspace   workspaces? @relation(fields: [workspaceId], references: [id])
-  userId      String?     @db.Uuid
-  workspaceId String?     @db.Uuid
+  user        User?      @relation(fields: [userId], references: [id])
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+  userId      String?    @db.Uuid
+  workspaceId String?    @db.Uuid
+
+  @@map("memberships")
 }
 
-model workspaces {
+model Workspace {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now()) @db.Timestamptz
   updatedAt DateTime @default(now()) @updatedAt
   subdomain String   @unique
   reference String   @unique
 
-  memberships memberships[]
+  memberships Membership[]
+
+  @@map("workspaces")
 }

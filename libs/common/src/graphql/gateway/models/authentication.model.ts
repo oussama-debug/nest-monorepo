@@ -1,5 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { User } from 'libs/database-gateway/src/graphql';
+import { UserGQLEntityType } from '@app/common/graphql/gateway/models/user.model';
 
 @ObjectType()
 export class AuthenticationResponseGQLEntityType {
@@ -7,5 +7,5 @@ export class AuthenticationResponseGQLEntityType {
   access_token: string;
 
   @Field()
-  user: User;
+  user: UserGQLEntityType;
 }

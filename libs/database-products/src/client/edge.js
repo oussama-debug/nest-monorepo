@@ -159,8 +159,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator typegraphql {\n  provider            = \"node ../../node_modules/prisma-nestjs-graphql\"\n  output              = \"../src/graphql\"\n  useSimpleInputs     = true\n  formatGeneratedCode = true\n  simpleResolvers     = true\n}\n\nmodel Product {\n  id          String   @id @default(uuid()) @db.Uuid\n  createdAt   DateTime @default(now()) @db.Timestamptz\n  workspaceId String   @db.Uuid\n  userId      String   @db.Uuid\n\n  name        String\n  description String\n  published   Boolean @default(false)\n\n  @@map(\"products\")\n}\n",
-  "inlineSchemaHash": "02f9797283216b4a800a444a5fb032ad699e7fcadd90bd36712b082b885f071e",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator typegraphql {\n  provider                   = \"node ../../node_modules/prisma-nestjs-graphql\"\n  output                     = \"../src/graphql\"\n  useSimpleInputs            = true\n  formatGeneratedCode        = true\n  simpleResolvers            = true\n  emitTranspiledCode         = true\n  useUncheckedScalarInputs   = true\n  outputFilePattern          = \"{name}.ts\"\n  useOutputTypesOnlyForTypes = true\n}\n\nmodel Product {\n  id          String   @id @default(uuid()) @db.Uuid\n  createdAt   DateTime @default(now()) @db.Timestamptz\n  workspaceId String   @db.Uuid\n  userId      String   @db.Uuid\n\n  name        String\n  description String\n  published   Boolean @default(false)\n\n  @@index([workspaceId])\n  @@index([userId])\n  @@map(\"products\")\n}\n",
+  "inlineSchemaHash": "08cad8601bce574ec63076550a0ee725651a7539305587153e428aea439f2988",
   "copyEngine": true
 }
 config.dirname = '/'

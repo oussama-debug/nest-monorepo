@@ -9,11 +9,15 @@ datasource db {
 }
 
 generator typegraphql {
-  provider            = "node ../../node_modules/prisma-nestjs-graphql"
-  output              = "../src/graphql"
-  useSimpleInputs     = true
-  formatGeneratedCode = true
-  simpleResolvers     = true
+  provider                   = "node ../../node_modules/prisma-nestjs-graphql"
+  output                     = "../src/graphql"
+  useSimpleInputs            = true
+  formatGeneratedCode        = true
+  simpleResolvers            = true
+  emitTranspiledCode         = true
+  useUncheckedScalarInputs   = true
+  outputFilePattern          = "{name}.ts"
+  useOutputTypesOnlyForTypes = true
 }
 
 model Product {
@@ -26,5 +30,7 @@ model Product {
   description String
   published   Boolean @default(false)
 
+  @@index([workspaceId])
+  @@index([userId])
   @@map("products")
 }

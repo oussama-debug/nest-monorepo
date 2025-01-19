@@ -7,4 +7,7 @@ export class CreateUserGQLInput {
 
   @Field()
   password: string;
+
+  @Field()
+  country: string;
 }

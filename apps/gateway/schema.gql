@@ -9,15 +9,27 @@ type UserGQLEntityType {
   country: String!
 }
 
+type AuthenticationResponseGQLEntityType {
+  access_token: String!
+  user: UserGQLEntityType!
+}
+
 type Query {
   hello: String!
 }
 
 type Mutation {
-  createUser(input: CreateUserGQLInput!): UserGQLEntityType!
+  createUser(input: CreateUserGQLInput!): AuthenticationResponseGQLEntityType!
+  loginUser(input: AuthenticationGQLInput!): AuthenticationResponseGQLEntityType!
 }
 
 input CreateUserGQLInput {
+  username: String!
+  password: String!
+  country: String!
+}
+
+input AuthenticationGQLInput {
   username: String!
   password: String!
 }

@@ -3,6 +3,7 @@ import { PrismaService, User } from 'libs/database-gateway/src';
 import { CreateUserInput } from './inputs/input-create-user';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { UserAlreadyExistsGQLError } from '@app/common/graphql/gateway/errors/user-already-exists';
 
 @Injectable()
 export class AuthenticationService {
@@ -18,8 +19,15 @@ export class AuthenticationService {
   }
 
   async createUser(input: CreateUserInput): Promise<User | null> {
+    const user = await this.findUserByUsername(input.username);
+    if (user) throw new UserAlreadyExistsGQLError('username is already used');
+
     return await this.databaseService.user.create({
-      data: input,
+      data: {
+        username: input.username.toLowerCase().trim(),
+        password: await bcrypt.hash(input.password, 12),
+        country: input.country,
+      },
     });
   }
 

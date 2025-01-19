@@ -11,6 +11,12 @@
 export class CreateUserGQLInput {
     username: string;
     password: string;
+    country: string;
+}
+
+export class AuthenticationGQLInput {
+    username: string;
+    password: string;
 }
 
 export class UserGQLEntityType {
@@ -20,12 +26,19 @@ export class UserGQLEntityType {
     country: string;
 }
 
+export class AuthenticationResponseGQLEntityType {
+    access_token: string;
+    user: UserGQLEntityType;
+}
+
 export abstract class IQuery {
     abstract hello(): string | Promise<string>;
 }
 
 export abstract class IMutation {
-    abstract createUser(input: CreateUserGQLInput): UserGQLEntityType | Promise<UserGQLEntityType>;
+    abstract createUser(input: CreateUserGQLInput): AuthenticationResponseGQLEntityType | Promise<AuthenticationResponseGQLEntityType>;
+
+    abstract loginUser(input: AuthenticationGQLInput): AuthenticationResponseGQLEntityType | Promise<AuthenticationResponseGQLEntityType>;
 }
 
 type Nullable<T> = T | null;

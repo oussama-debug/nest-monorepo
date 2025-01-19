@@ -117,7 +117,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UsersScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   username: 'username',
@@ -127,7 +127,7 @@ exports.Prisma.UsersScalarFieldEnum = {
   hasVerifiedIdentity: 'hasVerifiedIdentity'
 };
 
-exports.Prisma.MembershipsScalarFieldEnum = {
+exports.Prisma.MembershipScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -135,7 +135,7 @@ exports.Prisma.MembershipsScalarFieldEnum = {
   workspaceId: 'workspaceId'
 };
 
-exports.Prisma.WorkspacesScalarFieldEnum = {
+exports.Prisma.WorkspaceScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -160,9 +160,9 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  users: 'users',
-  memberships: 'memberships',
-  workspaces: 'workspaces'
+  User: 'User',
+  Membership: 'Membership',
+  Workspace: 'Workspace'
 };
 
 /**
