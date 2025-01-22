@@ -12,7 +12,7 @@ export class AuthenticationResolver {
   @Mutation(() => AuthenticationResponseGQLEntityType)
   async createUser(@Args('input') input: CreateUserGQLInput) {
     const user = await this.authenticationService.createUser(input);
-    return this.authenticationService.login(user);
+    return await this.authenticationService.login(user);
   }
 
   @Mutation(() => AuthenticationResponseGQLEntityType)

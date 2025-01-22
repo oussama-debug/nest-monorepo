@@ -6,6 +6,7 @@ import { join } from 'path';
 
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CustomerModule } from './customer/customer.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CustomerModule } from './customer/customer.module';
     }),
     AuthenticationModule,
     CustomerModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],

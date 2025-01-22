@@ -2,11 +2,40 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type WorkspaceGQLEntityType {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  subdomain: String!
+  reference: String!
+  memberships: [MembershipGQLEntityType!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MembershipGQLEntityType {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: UserGQLEntityType
+  workspace: WorkspaceGQLEntityType
+  userId: String
+  workspaceId: String
+}
+
 type UserGQLEntityType {
   id: ID!
+  createdAt: DateTime!
   username: String!
   password: String!
   country: String!
+  stripeCustomerId: String
+  hasVerifiedIdentity: Boolean!
+  isOnboarded: Boolean!
+  memberships: [MembershipGQLEntityType!]
 }
 
 type AuthenticationResponseGQLEntityType {

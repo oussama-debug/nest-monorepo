@@ -124,7 +124,9 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   country: 'country',
   stripeCustomerId: 'stripeCustomerId',
-  hasVerifiedIdentity: 'hasVerifiedIdentity'
+  hasVerifiedIdentity: 'hasVerifiedIdentity',
+  isOnboarded: 'isOnboarded',
+  userType: 'userType'
 };
 
 exports.Prisma.MembershipScalarFieldEnum = {
@@ -157,7 +159,10 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.UserType = exports.$Enums.UserType = {
+  customer: 'customer',
+  business: 'business'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

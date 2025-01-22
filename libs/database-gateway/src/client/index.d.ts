@@ -30,6 +30,23 @@ export type Membership = $Result.DefaultSelection<Prisma.$MembershipPayload>
 export type Workspace = $Result.DefaultSelection<Prisma.$WorkspacePayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserType: {
+  customer: 'customer',
+  business: 'business'
+};
+
+export type UserType = (typeof UserType)[keyof typeof UserType]
+
+}
+
+export type UserType = $Enums.UserType
+
+export const UserType: typeof $Enums.UserType
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -1127,6 +1144,8 @@ export namespace Prisma {
     country: string | null
     stripeCustomerId: string | null
     hasVerifiedIdentity: boolean | null
+    isOnboarded: boolean | null
+    userType: $Enums.UserType | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1137,6 +1156,8 @@ export namespace Prisma {
     country: string | null
     stripeCustomerId: string | null
     hasVerifiedIdentity: boolean | null
+    isOnboarded: boolean | null
+    userType: $Enums.UserType | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1147,6 +1168,8 @@ export namespace Prisma {
     country: number
     stripeCustomerId: number
     hasVerifiedIdentity: number
+    isOnboarded: number
+    userType: number
     _all: number
   }
 
@@ -1159,6 +1182,8 @@ export namespace Prisma {
     country?: true
     stripeCustomerId?: true
     hasVerifiedIdentity?: true
+    isOnboarded?: true
+    userType?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1169,6 +1194,8 @@ export namespace Prisma {
     country?: true
     stripeCustomerId?: true
     hasVerifiedIdentity?: true
+    isOnboarded?: true
+    userType?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1179,6 +1206,8 @@ export namespace Prisma {
     country?: true
     stripeCustomerId?: true
     hasVerifiedIdentity?: true
+    isOnboarded?: true
+    userType?: true
     _all?: true
   }
 
@@ -1262,6 +1291,8 @@ export namespace Prisma {
     country: string
     stripeCustomerId: string | null
     hasVerifiedIdentity: boolean
+    isOnboarded: boolean
+    userType: $Enums.UserType
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1289,6 +1320,8 @@ export namespace Prisma {
     country?: boolean
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: boolean
     memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1301,6 +1334,8 @@ export namespace Prisma {
     country?: boolean
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1311,6 +1346,8 @@ export namespace Prisma {
     country?: boolean
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1321,9 +1358,11 @@ export namespace Prisma {
     country?: boolean
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "username" | "password" | "country" | "stripeCustomerId" | "hasVerifiedIdentity", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "username" | "password" | "country" | "stripeCustomerId" | "hasVerifiedIdentity" | "isOnboarded" | "userType", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1344,6 +1383,8 @@ export namespace Prisma {
       country: string
       stripeCustomerId: string | null
       hasVerifiedIdentity: boolean
+      isOnboarded: boolean
+      userType: $Enums.UserType
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1775,6 +1816,8 @@ export namespace Prisma {
     readonly country: FieldRef<"User", 'String'>
     readonly stripeCustomerId: FieldRef<"User", 'String'>
     readonly hasVerifiedIdentity: FieldRef<"User", 'Boolean'>
+    readonly isOnboarded: FieldRef<"User", 'Boolean'>
+    readonly userType: FieldRef<"User", 'UserType'>
   }
     
 
@@ -4364,7 +4407,9 @@ export namespace Prisma {
     password: 'password',
     country: 'country',
     stripeCustomerId: 'stripeCustomerId',
-    hasVerifiedIdentity: 'hasVerifiedIdentity'
+    hasVerifiedIdentity: 'hasVerifiedIdentity',
+    isOnboarded: 'isOnboarded',
+    userType: 'userType'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4457,6 +4502,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserType'
+   */
+  export type EnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserType[]'
+   */
+  export type ListEnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -4484,6 +4543,8 @@ export namespace Prisma {
     country?: StringFilter<"User"> | string
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
     hasVerifiedIdentity?: BoolFilter<"User"> | boolean
+    isOnboarded?: BoolFilter<"User"> | boolean
+    userType?: EnumUserTypeFilter<"User"> | $Enums.UserType
     memberships?: MembershipListRelationFilter
   }
 
@@ -4495,6 +4556,8 @@ export namespace Prisma {
     country?: SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
     hasVerifiedIdentity?: SortOrder
+    isOnboarded?: SortOrder
+    userType?: SortOrder
     memberships?: MembershipOrderByRelationAggregateInput
   }
 
@@ -4509,6 +4572,8 @@ export namespace Prisma {
     country?: StringFilter<"User"> | string
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
     hasVerifiedIdentity?: BoolFilter<"User"> | boolean
+    isOnboarded?: BoolFilter<"User"> | boolean
+    userType?: EnumUserTypeFilter<"User"> | $Enums.UserType
     memberships?: MembershipListRelationFilter
   }, "id" | "username">
 
@@ -4520,6 +4585,8 @@ export namespace Prisma {
     country?: SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
     hasVerifiedIdentity?: SortOrder
+    isOnboarded?: SortOrder
+    userType?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4536,6 +4603,8 @@ export namespace Prisma {
     country?: StringWithAggregatesFilter<"User"> | string
     stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
     hasVerifiedIdentity?: BoolWithAggregatesFilter<"User"> | boolean
+    isOnboarded?: BoolWithAggregatesFilter<"User"> | boolean
+    userType?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
   }
 
   export type MembershipWhereInput = {
@@ -4659,6 +4728,8 @@ export namespace Prisma {
     country?: string
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: $Enums.UserType
     memberships?: MembershipCreateNestedManyWithoutUserInput
   }
 
@@ -4670,6 +4741,8 @@ export namespace Prisma {
     country?: string
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: $Enums.UserType
     memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -4681,6 +4754,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
+    isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     memberships?: MembershipUpdateManyWithoutUserNestedInput
   }
 
@@ -4692,6 +4767,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
+    isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -4703,6 +4780,8 @@ export namespace Prisma {
     country?: string
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: $Enums.UserType
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4713,6 +4792,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
+    isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4723,6 +4804,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
+    isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type MembershipCreateInput = {
@@ -4897,6 +4980,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumUserTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
   export type MembershipListRelationFilter = {
     every?: MembershipWhereInput
     some?: MembershipWhereInput
@@ -4920,6 +5010,8 @@ export namespace Prisma {
     country?: SortOrder
     stripeCustomerId?: SortOrder
     hasVerifiedIdentity?: SortOrder
+    isOnboarded?: SortOrder
+    userType?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -4930,6 +5022,8 @@ export namespace Prisma {
     country?: SortOrder
     stripeCustomerId?: SortOrder
     hasVerifiedIdentity?: SortOrder
+    isOnboarded?: SortOrder
+    userType?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -4940,6 +5034,8 @@ export namespace Prisma {
     country?: SortOrder
     stripeCustomerId?: SortOrder
     hasVerifiedIdentity?: SortOrder
+    isOnboarded?: SortOrder
+    userType?: SortOrder
   }
 
   export type UuidWithAggregatesFilter<$PrismaModel = never> = {
@@ -5013,6 +5109,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserTypeFilter<$PrismaModel>
+    _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -5128,6 +5234,10 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type EnumUserTypeFieldUpdateOperationsInput = {
+    set?: $Enums.UserType
   }
 
   export type MembershipUpdateManyWithoutUserNestedInput = {
@@ -5287,6 +5397,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumUserTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
   export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5379,6 +5496,16 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedEnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserTypeFilter<$PrismaModel>
+    _max?: NestedEnumUserTypeFilter<$PrismaModel>
+  }
+
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -5463,6 +5590,8 @@ export namespace Prisma {
     country?: string
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: $Enums.UserType
   }
 
   export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -5473,6 +5602,8 @@ export namespace Prisma {
     country?: string
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
+    isOnboarded?: boolean
+    userType?: $Enums.UserType
   }
 
   export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -5520,6 +5651,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
+    isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -5530,6 +5663,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
+    isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type WorkspaceUpsertWithoutMembershipsInput = {

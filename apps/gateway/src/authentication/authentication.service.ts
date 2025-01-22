@@ -15,6 +15,18 @@ export class AuthenticationService {
   async findUserByUsername(username: string): Promise<User | null> {
     return await this.databaseService.user.findUnique({
       where: { username: username },
+      include: {
+        memberships: { include: { workspace: true } },
+      },
+    });
+  }
+
+  async findUserById(id: string): Promise<User | null> {
+    return await this.databaseService.user.findUnique({
+      where: { id },
+      include: {
+        memberships: { include: { workspace: true } },
+      },
     });
   }
 
@@ -44,6 +56,7 @@ export class AuthenticationService {
     const payload = { username: user.username, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
+      user: user,
     };
   }
 }
