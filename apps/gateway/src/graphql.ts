@@ -19,8 +19,15 @@ export class AuthenticationGQLInput {
     password: string;
 }
 
+export class CreateWorkspaceGQLInput {
+    name: string;
+    description: string;
+}
+
 export class WorkspaceGQLEntityType {
     id: string;
+    name: string;
+    description: string;
     createdAt: DateTime;
     updatedAt: DateTime;
     subdomain: string;
@@ -32,6 +39,7 @@ export class MembershipGQLEntityType {
     id: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+    roles: string[];
     user?: Nullable<UserGQLEntityType>;
     workspace?: Nullable<WorkspaceGQLEntityType>;
     userId?: Nullable<string>;
@@ -57,12 +65,16 @@ export class AuthenticationResponseGQLEntityType {
 
 export abstract class IQuery {
     abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
+
+    abstract findWorkspaces(): WorkspaceGQLEntityType[] | Promise<WorkspaceGQLEntityType[]>;
 }
 
 export abstract class IMutation {
     abstract createUser(input: CreateUserGQLInput): AuthenticationResponseGQLEntityType | Promise<AuthenticationResponseGQLEntityType>;
 
     abstract loginUser(input: AuthenticationGQLInput): AuthenticationResponseGQLEntityType | Promise<AuthenticationResponseGQLEntityType>;
+
+    abstract createWorkspace(input: CreateWorkspaceGQLInput): WorkspaceGQLEntityType | Promise<WorkspaceGQLEntityType>;
 }
 
 export type DateTime = any;

@@ -4,6 +4,8 @@
 
 type WorkspaceGQLEntityType {
   id: ID!
+  name: String!
+  description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   subdomain: String!
@@ -20,6 +22,7 @@ type MembershipGQLEntityType {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
+  roles: [String!]!
   user: UserGQLEntityType
   workspace: WorkspaceGQLEntityType
   userId: String
@@ -45,11 +48,13 @@ type AuthenticationResponseGQLEntityType {
 
 type Query {
   me: UserGQLEntityType!
+  findWorkspaces: [WorkspaceGQLEntityType!]!
 }
 
 type Mutation {
   createUser(input: CreateUserGQLInput!): AuthenticationResponseGQLEntityType!
   loginUser(input: AuthenticationGQLInput!): AuthenticationResponseGQLEntityType!
+  createWorkspace(input: CreateWorkspaceGQLInput!): WorkspaceGQLEntityType!
 }
 
 input CreateUserGQLInput {
@@ -61,4 +66,9 @@ input CreateUserGQLInput {
 input AuthenticationGQLInput {
   username: String!
   password: String!
+}
+
+input CreateWorkspaceGQLInput {
+  name: String!
+  description: String!
 }

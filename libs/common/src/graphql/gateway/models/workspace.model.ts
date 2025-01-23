@@ -7,6 +7,12 @@ export class WorkspaceGQLEntityType {
   id: string;
 
   @Field()
+  name: string;
+
+  @Field()
+  description: string;
+
+  @Field()
   createdAt: Date;
 
   @Field()

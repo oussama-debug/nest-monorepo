@@ -126,6 +126,7 @@ exports.Prisma.UserScalarFieldEnum = {
   stripeCustomerId: 'stripeCustomerId',
   hasVerifiedIdentity: 'hasVerifiedIdentity',
   isOnboarded: 'isOnboarded',
+  onboardingStep: 'onboardingStep',
   userType: 'userType'
 };
 
@@ -133,16 +134,20 @@ exports.Prisma.MembershipScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  roles: 'roles',
   userId: 'userId',
   workspaceId: 'workspaceId'
 };
 
 exports.Prisma.WorkspaceScalarFieldEnum = {
   id: 'id',
+  name: 'name',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   subdomain: 'subdomain',
-  reference: 'reference'
+  reference: 'reference',
+  stripe_account_id: 'stripe_account_id'
 };
 
 exports.Prisma.SortOrder = {
@@ -159,9 +164,20 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.OnboardingType = exports.$Enums.OnboardingType = {
+  setup_store: 'setup_store',
+  setup_profile: 'setup_profile'
+};
+
 exports.UserType = exports.$Enums.UserType = {
   customer: 'customer',
   business: 'business'
+};
+
+exports.MembershipType = exports.$Enums.MembershipType = {
+  owner: 'owner',
+  member: 'member',
+  viewer: 'viewer'
 };
 
 exports.Prisma.ModelName = {

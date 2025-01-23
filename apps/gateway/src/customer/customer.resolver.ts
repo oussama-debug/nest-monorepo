@@ -1,16 +1,39 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseUser } from '../common/decorators/use-user';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthenticationGuard } from '../common/guards/graphql.guard';
 import { UserGQLEntityType } from '@app/common/graphql/gateway/models/user.model';
+import { WorkspaceGQLEntityType } from '@app/common/graphql/gateway/models/workspace.model';
+import { CreateWorkspaceGQLInput } from '@app/common/graphql/gateway/inputs/create-workspace-input';
+import { CustomerService } from './customer.service';
 
 @Resolver()
 export class CustomerResolver {
-  constructor() {}
+  constructor(private readonly customerService: CustomerService) {}
 
   @Query(() => UserGQLEntityType)
   @UseGuards(JwtAuthenticationGuard)
   async me(@UseUser() user) {
     return user;
+  }
+
+  @Query(() => [WorkspaceGQLEntityType])
+  @UseGuards(JwtAuthenticationGuard)
+  async findWorkspaces(@UseUser() user) {
+    return await this.customerService.findWorkspacesByOwner(user.id);
+  }
+
+  @Mutation(() => WorkspaceGQLEntityType)
+  @UseGuards(JwtAuthenticationGuard)
+  async createWorkspace(
+    @Args('input') input: CreateWorkspaceGQLInput,
+    @UseUser() user,
+  ) {
+    return await this.customerService.createWorkspace({
+      name: input.name,
+      description: input.description,
+      ownerId: user.id,
+      ownerUsername: user.username,
+    });
   }
 }

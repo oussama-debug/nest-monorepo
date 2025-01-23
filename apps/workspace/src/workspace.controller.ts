@@ -1,12 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { WorkspaceService } from './workspace.service';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class WorkspaceController {
   constructor(private readonly workspaceService: WorkspaceService) {}
 
-  @Get()
-  getHello(): string {
-    return this.workspaceService.getHello();
-  }
+  @MessagePattern('workspace:create')
+  async createWorkspaceStore() {}
 }

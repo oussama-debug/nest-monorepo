@@ -40,11 +40,36 @@ export namespace $Enums {
 
 export type UserType = (typeof UserType)[keyof typeof UserType]
 
+
+export const MembershipType: {
+  owner: 'owner',
+  member: 'member',
+  viewer: 'viewer'
+};
+
+export type MembershipType = (typeof MembershipType)[keyof typeof MembershipType]
+
+
+export const OnboardingType: {
+  setup_store: 'setup_store',
+  setup_profile: 'setup_profile'
+};
+
+export type OnboardingType = (typeof OnboardingType)[keyof typeof OnboardingType]
+
 }
 
 export type UserType = $Enums.UserType
 
 export const UserType: typeof $Enums.UserType
+
+export type MembershipType = $Enums.MembershipType
+
+export const MembershipType: typeof $Enums.MembershipType
+
+export type OnboardingType = $Enums.OnboardingType
+
+export const OnboardingType: typeof $Enums.OnboardingType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1145,6 +1170,7 @@ export namespace Prisma {
     stripeCustomerId: string | null
     hasVerifiedIdentity: boolean | null
     isOnboarded: boolean | null
+    onboardingStep: $Enums.OnboardingType | null
     userType: $Enums.UserType | null
   }
 
@@ -1157,6 +1183,7 @@ export namespace Prisma {
     stripeCustomerId: string | null
     hasVerifiedIdentity: boolean | null
     isOnboarded: boolean | null
+    onboardingStep: $Enums.OnboardingType | null
     userType: $Enums.UserType | null
   }
 
@@ -1169,6 +1196,7 @@ export namespace Prisma {
     stripeCustomerId: number
     hasVerifiedIdentity: number
     isOnboarded: number
+    onboardingStep: number
     userType: number
     _all: number
   }
@@ -1183,6 +1211,7 @@ export namespace Prisma {
     stripeCustomerId?: true
     hasVerifiedIdentity?: true
     isOnboarded?: true
+    onboardingStep?: true
     userType?: true
   }
 
@@ -1195,6 +1224,7 @@ export namespace Prisma {
     stripeCustomerId?: true
     hasVerifiedIdentity?: true
     isOnboarded?: true
+    onboardingStep?: true
     userType?: true
   }
 
@@ -1207,6 +1237,7 @@ export namespace Prisma {
     stripeCustomerId?: true
     hasVerifiedIdentity?: true
     isOnboarded?: true
+    onboardingStep?: true
     userType?: true
     _all?: true
   }
@@ -1292,6 +1323,7 @@ export namespace Prisma {
     stripeCustomerId: string | null
     hasVerifiedIdentity: boolean
     isOnboarded: boolean
+    onboardingStep: $Enums.OnboardingType
     userType: $Enums.UserType
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1321,6 +1353,7 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: boolean
     userType?: boolean
     memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1335,6 +1368,7 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: boolean
     userType?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1347,6 +1381,7 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: boolean
     userType?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1359,10 +1394,11 @@ export namespace Prisma {
     stripeCustomerId?: boolean
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: boolean
     userType?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "username" | "password" | "country" | "stripeCustomerId" | "hasVerifiedIdentity" | "isOnboarded" | "userType", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "username" | "password" | "country" | "stripeCustomerId" | "hasVerifiedIdentity" | "isOnboarded" | "onboardingStep" | "userType", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1384,6 +1420,7 @@ export namespace Prisma {
       stripeCustomerId: string | null
       hasVerifiedIdentity: boolean
       isOnboarded: boolean
+      onboardingStep: $Enums.OnboardingType
       userType: $Enums.UserType
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1817,6 +1854,7 @@ export namespace Prisma {
     readonly stripeCustomerId: FieldRef<"User", 'String'>
     readonly hasVerifiedIdentity: FieldRef<"User", 'Boolean'>
     readonly isOnboarded: FieldRef<"User", 'Boolean'>
+    readonly onboardingStep: FieldRef<"User", 'OnboardingType'>
     readonly userType: FieldRef<"User", 'UserType'>
   }
     
@@ -2266,6 +2304,7 @@ export namespace Prisma {
     id: number
     createdAt: number
     updatedAt: number
+    roles: number
     userId: number
     workspaceId: number
     _all: number
@@ -2292,6 +2331,7 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     updatedAt?: true
+    roles?: true
     userId?: true
     workspaceId?: true
     _all?: true
@@ -2373,6 +2413,7 @@ export namespace Prisma {
     id: string
     createdAt: Date
     updatedAt: Date
+    roles: $Enums.MembershipType[]
     userId: string | null
     workspaceId: string | null
     _count: MembershipCountAggregateOutputType | null
@@ -2398,6 +2439,7 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    roles?: boolean
     userId?: boolean
     workspaceId?: boolean
     user?: boolean | Membership$userArgs<ExtArgs>
@@ -2408,6 +2450,7 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    roles?: boolean
     userId?: boolean
     workspaceId?: boolean
     user?: boolean | Membership$userArgs<ExtArgs>
@@ -2418,6 +2461,7 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    roles?: boolean
     userId?: boolean
     workspaceId?: boolean
     user?: boolean | Membership$userArgs<ExtArgs>
@@ -2428,11 +2472,12 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    roles?: boolean
     userId?: boolean
     workspaceId?: boolean
   }
 
-  export type MembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "workspaceId", ExtArgs["result"]["membership"]>
+  export type MembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "roles" | "userId" | "workspaceId", ExtArgs["result"]["membership"]>
   export type MembershipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Membership$userArgs<ExtArgs>
     workspace?: boolean | Membership$workspaceArgs<ExtArgs>
@@ -2456,6 +2501,7 @@ export namespace Prisma {
       id: string
       createdAt: Date
       updatedAt: Date
+      roles: $Enums.MembershipType[]
       userId: string | null
       workspaceId: string | null
     }, ExtArgs["result"]["membership"]>
@@ -2886,6 +2932,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Membership", 'String'>
     readonly createdAt: FieldRef<"Membership", 'DateTime'>
     readonly updatedAt: FieldRef<"Membership", 'DateTime'>
+    readonly roles: FieldRef<"Membership", 'MembershipType[]'>
     readonly userId: FieldRef<"Membership", 'String'>
     readonly workspaceId: FieldRef<"Membership", 'String'>
   }
@@ -3340,52 +3387,70 @@ export namespace Prisma {
 
   export type WorkspaceMinAggregateOutputType = {
     id: string | null
+    name: string | null
+    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
     subdomain: string | null
     reference: string | null
+    stripe_account_id: string | null
   }
 
   export type WorkspaceMaxAggregateOutputType = {
     id: string | null
+    name: string | null
+    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
     subdomain: string | null
     reference: string | null
+    stripe_account_id: string | null
   }
 
   export type WorkspaceCountAggregateOutputType = {
     id: number
+    name: number
+    description: number
     createdAt: number
     updatedAt: number
     subdomain: number
     reference: number
+    stripe_account_id: number
     _all: number
   }
 
 
   export type WorkspaceMinAggregateInputType = {
     id?: true
+    name?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     subdomain?: true
     reference?: true
+    stripe_account_id?: true
   }
 
   export type WorkspaceMaxAggregateInputType = {
     id?: true
+    name?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     subdomain?: true
     reference?: true
+    stripe_account_id?: true
   }
 
   export type WorkspaceCountAggregateInputType = {
     id?: true
+    name?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     subdomain?: true
     reference?: true
+    stripe_account_id?: true
     _all?: true
   }
 
@@ -3463,10 +3528,13 @@ export namespace Prisma {
 
   export type WorkspaceGroupByOutputType = {
     id: string
+    name: string
+    description: string
     createdAt: Date
     updatedAt: Date
     subdomain: string
     reference: string
+    stripe_account_id: string | null
     _count: WorkspaceCountAggregateOutputType | null
     _min: WorkspaceMinAggregateOutputType | null
     _max: WorkspaceMaxAggregateOutputType | null
@@ -3488,39 +3556,51 @@ export namespace Prisma {
 
   export type WorkspaceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    stripe_account_id?: boolean
     memberships?: boolean | Workspace$membershipsArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workspace"]>
 
   export type WorkspaceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    stripe_account_id?: boolean
   }, ExtArgs["result"]["workspace"]>
 
   export type WorkspaceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    stripe_account_id?: boolean
   }, ExtArgs["result"]["workspace"]>
 
   export type WorkspaceSelectScalar = {
     id?: boolean
+    name?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    stripe_account_id?: boolean
   }
 
-  export type WorkspaceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "subdomain" | "reference", ExtArgs["result"]["workspace"]>
+  export type WorkspaceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "subdomain" | "reference" | "stripe_account_id", ExtArgs["result"]["workspace"]>
   export type WorkspaceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     memberships?: boolean | Workspace$membershipsArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
@@ -3535,10 +3615,13 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      name: string
+      description: string
       createdAt: Date
       updatedAt: Date
       subdomain: string
       reference: string
+      stripe_account_id: string | null
     }, ExtArgs["result"]["workspace"]>
     composites: {}
   }
@@ -3964,10 +4047,13 @@ export namespace Prisma {
    */ 
   interface WorkspaceFieldRefs {
     readonly id: FieldRef<"Workspace", 'String'>
+    readonly name: FieldRef<"Workspace", 'String'>
+    readonly description: FieldRef<"Workspace", 'String'>
     readonly createdAt: FieldRef<"Workspace", 'DateTime'>
     readonly updatedAt: FieldRef<"Workspace", 'DateTime'>
     readonly subdomain: FieldRef<"Workspace", 'String'>
     readonly reference: FieldRef<"Workspace", 'String'>
+    readonly stripe_account_id: FieldRef<"Workspace", 'String'>
   }
     
 
@@ -4409,6 +4495,7 @@ export namespace Prisma {
     stripeCustomerId: 'stripeCustomerId',
     hasVerifiedIdentity: 'hasVerifiedIdentity',
     isOnboarded: 'isOnboarded',
+    onboardingStep: 'onboardingStep',
     userType: 'userType'
   };
 
@@ -4419,6 +4506,7 @@ export namespace Prisma {
     id: 'id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    roles: 'roles',
     userId: 'userId',
     workspaceId: 'workspaceId'
   };
@@ -4428,10 +4516,13 @@ export namespace Prisma {
 
   export const WorkspaceScalarFieldEnum: {
     id: 'id',
+    name: 'name',
+    description: 'description',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     subdomain: 'subdomain',
-    reference: 'reference'
+    reference: 'reference',
+    stripe_account_id: 'stripe_account_id'
   };
 
   export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
@@ -4502,6 +4593,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'OnboardingType'
+   */
+  export type EnumOnboardingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OnboardingType'>
+    
+
+
+  /**
+   * Reference to a field of type 'OnboardingType[]'
+   */
+  export type ListEnumOnboardingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OnboardingType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'UserType'
    */
   export type EnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType'>
@@ -4512,6 +4617,20 @@ export namespace Prisma {
    * Reference to a field of type 'UserType[]'
    */
   export type ListEnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MembershipType[]'
+   */
+  export type ListEnumMembershipTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MembershipType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MembershipType'
+   */
+  export type EnumMembershipTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MembershipType'>
     
 
 
@@ -4544,6 +4663,7 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
     hasVerifiedIdentity?: BoolFilter<"User"> | boolean
     isOnboarded?: BoolFilter<"User"> | boolean
+    onboardingStep?: EnumOnboardingTypeFilter<"User"> | $Enums.OnboardingType
     userType?: EnumUserTypeFilter<"User"> | $Enums.UserType
     memberships?: MembershipListRelationFilter
   }
@@ -4557,6 +4677,7 @@ export namespace Prisma {
     stripeCustomerId?: SortOrderInput | SortOrder
     hasVerifiedIdentity?: SortOrder
     isOnboarded?: SortOrder
+    onboardingStep?: SortOrder
     userType?: SortOrder
     memberships?: MembershipOrderByRelationAggregateInput
   }
@@ -4573,6 +4694,7 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
     hasVerifiedIdentity?: BoolFilter<"User"> | boolean
     isOnboarded?: BoolFilter<"User"> | boolean
+    onboardingStep?: EnumOnboardingTypeFilter<"User"> | $Enums.OnboardingType
     userType?: EnumUserTypeFilter<"User"> | $Enums.UserType
     memberships?: MembershipListRelationFilter
   }, "id" | "username">
@@ -4586,6 +4708,7 @@ export namespace Prisma {
     stripeCustomerId?: SortOrderInput | SortOrder
     hasVerifiedIdentity?: SortOrder
     isOnboarded?: SortOrder
+    onboardingStep?: SortOrder
     userType?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4604,6 +4727,7 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
     hasVerifiedIdentity?: BoolWithAggregatesFilter<"User"> | boolean
     isOnboarded?: BoolWithAggregatesFilter<"User"> | boolean
+    onboardingStep?: EnumOnboardingTypeWithAggregatesFilter<"User"> | $Enums.OnboardingType
     userType?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
   }
 
@@ -4614,6 +4738,7 @@ export namespace Prisma {
     id?: UuidFilter<"Membership"> | string
     createdAt?: DateTimeFilter<"Membership"> | Date | string
     updatedAt?: DateTimeFilter<"Membership"> | Date | string
+    roles?: EnumMembershipTypeNullableListFilter<"Membership">
     userId?: UuidNullableFilter<"Membership"> | string | null
     workspaceId?: UuidNullableFilter<"Membership"> | string | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -4624,6 +4749,7 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    roles?: SortOrder
     userId?: SortOrderInput | SortOrder
     workspaceId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
@@ -4637,6 +4763,7 @@ export namespace Prisma {
     NOT?: MembershipWhereInput | MembershipWhereInput[]
     createdAt?: DateTimeFilter<"Membership"> | Date | string
     updatedAt?: DateTimeFilter<"Membership"> | Date | string
+    roles?: EnumMembershipTypeNullableListFilter<"Membership">
     userId?: UuidNullableFilter<"Membership"> | string | null
     workspaceId?: UuidNullableFilter<"Membership"> | string | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -4647,6 +4774,7 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    roles?: SortOrder
     userId?: SortOrderInput | SortOrder
     workspaceId?: SortOrderInput | SortOrder
     _count?: MembershipCountOrderByAggregateInput
@@ -4661,6 +4789,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Membership"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Membership"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Membership"> | Date | string
+    roles?: EnumMembershipTypeNullableListFilter<"Membership">
     userId?: UuidNullableWithAggregatesFilter<"Membership"> | string | null
     workspaceId?: UuidNullableWithAggregatesFilter<"Membership"> | string | null
   }
@@ -4670,19 +4799,25 @@ export namespace Prisma {
     OR?: WorkspaceWhereInput[]
     NOT?: WorkspaceWhereInput | WorkspaceWhereInput[]
     id?: UuidFilter<"Workspace"> | string
+    name?: StringFilter<"Workspace"> | string
+    description?: StringFilter<"Workspace"> | string
     createdAt?: DateTimeFilter<"Workspace"> | Date | string
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
     subdomain?: StringFilter<"Workspace"> | string
     reference?: StringFilter<"Workspace"> | string
+    stripe_account_id?: StringNullableFilter<"Workspace"> | string | null
     memberships?: MembershipListRelationFilter
   }
 
   export type WorkspaceOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    stripe_account_id?: SortOrderInput | SortOrder
     memberships?: MembershipOrderByRelationAggregateInput
   }
 
@@ -4693,17 +4828,23 @@ export namespace Prisma {
     AND?: WorkspaceWhereInput | WorkspaceWhereInput[]
     OR?: WorkspaceWhereInput[]
     NOT?: WorkspaceWhereInput | WorkspaceWhereInput[]
+    name?: StringFilter<"Workspace"> | string
+    description?: StringFilter<"Workspace"> | string
     createdAt?: DateTimeFilter<"Workspace"> | Date | string
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
+    stripe_account_id?: StringNullableFilter<"Workspace"> | string | null
     memberships?: MembershipListRelationFilter
   }, "id" | "subdomain" | "reference">
 
   export type WorkspaceOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    stripe_account_id?: SortOrderInput | SortOrder
     _count?: WorkspaceCountOrderByAggregateInput
     _max?: WorkspaceMaxOrderByAggregateInput
     _min?: WorkspaceMinOrderByAggregateInput
@@ -4714,10 +4855,13 @@ export namespace Prisma {
     OR?: WorkspaceScalarWhereWithAggregatesInput[]
     NOT?: WorkspaceScalarWhereWithAggregatesInput | WorkspaceScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Workspace"> | string
+    name?: StringWithAggregatesFilter<"Workspace"> | string
+    description?: StringWithAggregatesFilter<"Workspace"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Workspace"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Workspace"> | Date | string
     subdomain?: StringWithAggregatesFilter<"Workspace"> | string
     reference?: StringWithAggregatesFilter<"Workspace"> | string
+    stripe_account_id?: StringNullableWithAggregatesFilter<"Workspace"> | string | null
   }
 
   export type UserCreateInput = {
@@ -4729,6 +4873,7 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: $Enums.OnboardingType
     userType?: $Enums.UserType
     memberships?: MembershipCreateNestedManyWithoutUserInput
   }
@@ -4742,6 +4887,7 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: $Enums.OnboardingType
     userType?: $Enums.UserType
     memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
   }
@@ -4755,6 +4901,7 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
     isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    onboardingStep?: EnumOnboardingTypeFieldUpdateOperationsInput | $Enums.OnboardingType
     userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     memberships?: MembershipUpdateManyWithoutUserNestedInput
   }
@@ -4768,6 +4915,7 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
     isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    onboardingStep?: EnumOnboardingTypeFieldUpdateOperationsInput | $Enums.OnboardingType
     userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -4781,6 +4929,7 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: $Enums.OnboardingType
     userType?: $Enums.UserType
   }
 
@@ -4793,6 +4942,7 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
     isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    onboardingStep?: EnumOnboardingTypeFieldUpdateOperationsInput | $Enums.OnboardingType
     userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
@@ -4805,6 +4955,7 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
     isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    onboardingStep?: EnumOnboardingTypeFieldUpdateOperationsInput | $Enums.OnboardingType
     userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
@@ -4812,6 +4963,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     user?: UserCreateNestedOneWithoutMembershipsInput
     workspace?: WorkspaceCreateNestedOneWithoutMembershipsInput
   }
@@ -4820,6 +4972,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     userId?: string | null
     workspaceId?: string | null
   }
@@ -4828,6 +4981,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     user?: UserUpdateOneWithoutMembershipsNestedInput
     workspace?: WorkspaceUpdateOneWithoutMembershipsNestedInput
   }
@@ -4836,6 +4990,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     workspaceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -4844,6 +4999,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     userId?: string | null
     workspaceId?: string | null
   }
@@ -4852,74 +5008,97 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
   }
 
   export type MembershipUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     workspaceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkspaceCreateInput = {
     id?: string
+    name: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    stripe_account_id?: string | null
     memberships?: MembershipCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateInput = {
     id?: string
+    name: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    stripe_account_id?: string | null
     memberships?: MembershipUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
     memberships?: MembershipUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
     memberships?: MembershipUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateManyInput = {
     id?: string
+    name: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    stripe_account_id?: string | null
   }
 
   export type WorkspaceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkspaceUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -4980,6 +5159,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumOnboardingTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnboardingType | EnumOnboardingTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnboardingTypeFilter<$PrismaModel> | $Enums.OnboardingType
+  }
+
   export type EnumUserTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
     in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
@@ -5011,6 +5197,7 @@ export namespace Prisma {
     stripeCustomerId?: SortOrder
     hasVerifiedIdentity?: SortOrder
     isOnboarded?: SortOrder
+    onboardingStep?: SortOrder
     userType?: SortOrder
   }
 
@@ -5023,6 +5210,7 @@ export namespace Prisma {
     stripeCustomerId?: SortOrder
     hasVerifiedIdentity?: SortOrder
     isOnboarded?: SortOrder
+    onboardingStep?: SortOrder
     userType?: SortOrder
   }
 
@@ -5035,6 +5223,7 @@ export namespace Prisma {
     stripeCustomerId?: SortOrder
     hasVerifiedIdentity?: SortOrder
     isOnboarded?: SortOrder
+    onboardingStep?: SortOrder
     userType?: SortOrder
   }
 
@@ -5111,6 +5300,16 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumOnboardingTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnboardingType | EnumOnboardingTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnboardingTypeWithAggregatesFilter<$PrismaModel> | $Enums.OnboardingType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOnboardingTypeFilter<$PrismaModel>
+    _max?: NestedEnumOnboardingTypeFilter<$PrismaModel>
+  }
+
   export type EnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
     in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
@@ -5119,6 +5318,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumUserTypeFilter<$PrismaModel>
     _max?: NestedEnumUserTypeFilter<$PrismaModel>
+  }
+
+  export type EnumMembershipTypeNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.MembershipType[] | ListEnumMembershipTypeFieldRefInput<$PrismaModel> | null
+    has?: $Enums.MembershipType | EnumMembershipTypeFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.MembershipType[] | ListEnumMembershipTypeFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.MembershipType[] | ListEnumMembershipTypeFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -5147,6 +5354,7 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    roles?: SortOrder
     userId?: SortOrder
     workspaceId?: SortOrder
   }
@@ -5184,26 +5392,35 @@ export namespace Prisma {
 
   export type WorkspaceCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    stripe_account_id?: SortOrder
   }
 
   export type WorkspaceMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    stripe_account_id?: SortOrder
   }
 
   export type WorkspaceMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    stripe_account_id?: SortOrder
   }
 
   export type MembershipCreateNestedManyWithoutUserInput = {
@@ -5234,6 +5451,10 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type EnumOnboardingTypeFieldUpdateOperationsInput = {
+    set?: $Enums.OnboardingType
   }
 
   export type EnumUserTypeFieldUpdateOperationsInput = {
@@ -5268,6 +5489,10 @@ export namespace Prisma {
     deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
   }
 
+  export type MembershipCreaterolesInput = {
+    set: $Enums.MembershipType[]
+  }
+
   export type UserCreateNestedOneWithoutMembershipsInput = {
     create?: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
     connectOrCreate?: UserCreateOrConnectWithoutMembershipsInput
@@ -5278,6 +5503,11 @@ export namespace Prisma {
     create?: XOR<WorkspaceCreateWithoutMembershipsInput, WorkspaceUncheckedCreateWithoutMembershipsInput>
     connectOrCreate?: WorkspaceCreateOrConnectWithoutMembershipsInput
     connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type MembershipUpdaterolesInput = {
+    set?: $Enums.MembershipType[]
+    push?: $Enums.MembershipType | $Enums.MembershipType[]
   }
 
   export type UserUpdateOneWithoutMembershipsNestedInput = {
@@ -5397,6 +5627,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumOnboardingTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnboardingType | EnumOnboardingTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnboardingTypeFilter<$PrismaModel> | $Enums.OnboardingType
+  }
+
   export type NestedEnumUserTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
     in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
@@ -5496,6 +5733,16 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedEnumOnboardingTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnboardingType | EnumOnboardingTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnboardingType[] | ListEnumOnboardingTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnboardingTypeWithAggregatesFilter<$PrismaModel> | $Enums.OnboardingType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOnboardingTypeFilter<$PrismaModel>
+    _max?: NestedEnumOnboardingTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
     in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
@@ -5535,6 +5782,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     workspace?: WorkspaceCreateNestedOneWithoutMembershipsInput
   }
 
@@ -5542,6 +5790,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     workspaceId?: string | null
   }
 
@@ -5578,6 +5827,7 @@ export namespace Prisma {
     id?: UuidFilter<"Membership"> | string
     createdAt?: DateTimeFilter<"Membership"> | Date | string
     updatedAt?: DateTimeFilter<"Membership"> | Date | string
+    roles?: EnumMembershipTypeNullableListFilter<"Membership">
     userId?: UuidNullableFilter<"Membership"> | string | null
     workspaceId?: UuidNullableFilter<"Membership"> | string | null
   }
@@ -5591,6 +5841,7 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: $Enums.OnboardingType
     userType?: $Enums.UserType
   }
 
@@ -5603,6 +5854,7 @@ export namespace Prisma {
     stripeCustomerId?: string | null
     hasVerifiedIdentity?: boolean
     isOnboarded?: boolean
+    onboardingStep?: $Enums.OnboardingType
     userType?: $Enums.UserType
   }
 
@@ -5613,18 +5865,24 @@ export namespace Prisma {
 
   export type WorkspaceCreateWithoutMembershipsInput = {
     id?: string
+    name: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    stripe_account_id?: string | null
   }
 
   export type WorkspaceUncheckedCreateWithoutMembershipsInput = {
     id?: string
+    name: string
+    description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    stripe_account_id?: string | null
   }
 
   export type WorkspaceCreateOrConnectWithoutMembershipsInput = {
@@ -5652,6 +5910,7 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
     isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    onboardingStep?: EnumOnboardingTypeFieldUpdateOperationsInput | $Enums.OnboardingType
     userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
@@ -5664,6 +5923,7 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     hasVerifiedIdentity?: BoolFieldUpdateOperationsInput | boolean
     isOnboarded?: BoolFieldUpdateOperationsInput | boolean
+    onboardingStep?: EnumOnboardingTypeFieldUpdateOperationsInput | $Enums.OnboardingType
     userType?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
@@ -5680,24 +5940,31 @@ export namespace Prisma {
 
   export type WorkspaceUpdateWithoutMembershipsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkspaceUncheckedUpdateWithoutMembershipsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MembershipCreateWithoutWorkspaceInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     user?: UserCreateNestedOneWithoutMembershipsInput
   }
 
@@ -5705,6 +5972,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     userId?: string | null
   }
 
@@ -5738,6 +6006,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     workspaceId?: string | null
   }
 
@@ -5745,6 +6014,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     workspace?: WorkspaceUpdateOneWithoutMembershipsNestedInput
   }
 
@@ -5752,6 +6022,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     workspaceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5759,6 +6030,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     workspaceId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5766,6 +6038,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    roles?: MembershipCreaterolesInput | $Enums.MembershipType[]
     userId?: string | null
   }
 
@@ -5773,6 +6046,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     user?: UserUpdateOneWithoutMembershipsNestedInput
   }
 
@@ -5780,6 +6054,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5787,6 +6062,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roles?: MembershipUpdaterolesInput | $Enums.MembershipType[]
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

@@ -13,6 +13,9 @@ export class MembershipGQLEntityType {
   @Field()
   updatedAt: Date;
 
+  @Field(() => [String])
+  roles: string[];
+
   @Field(() => UserGQLEntityType, { nullable: true })
   user?: UserGQLEntityType;
 

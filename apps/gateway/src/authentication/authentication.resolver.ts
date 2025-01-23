@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthenticationService } from './authentication.service';
 import { CreateUserGQLInput } from '../../../../libs/common/src/graphql/gateway/inputs/create-user-input';
 import { AuthenticationResponseGQLEntityType } from '@app/common/graphql/gateway/models/authentication.model';
@@ -21,7 +21,6 @@ export class AuthenticationResolver {
       input.username,
       input.password,
     );
-
     if (!user) {
       throw new InvalidCredentialsGQLError(
         'Credentials used to login are invalid',
