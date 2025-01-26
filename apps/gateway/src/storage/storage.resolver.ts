@@ -1,6 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { StorageService as S3Service } from '@app/storage';
 import {
+  SignedImageResponseGQLEntityType,
   StorageCompleteResponseGQLEntityType,
   StorageInitializationResponseGQLEntityType,
 } from '@app/common/graphql/gateway/models/storage.model';
@@ -10,6 +11,7 @@ import { JwtAuthenticationGuard } from '../common/guards/graphql.guard';
 import { InvalidFileSizeGQLError } from '@app/common/graphql/gateway/errors/invalid-file-size';
 import { CompleteUploadGQLInput } from '@app/common/graphql/gateway/inputs/complete-upload-input';
 import { AbortUploadGQLInput } from '@app/common/graphql/gateway/inputs/abort-upload-input';
+import { SignedImageGQLInput } from '@app/common/graphql/gateway/inputs/get-signed-image-input';
 
 @Resolver()
 export class StorageResolver {
@@ -36,6 +38,12 @@ export class StorageResolver {
       uploadId: input.uploadId,
       parts: input.parts,
     });
+  }
+
+  @Mutation(() => SignedImageResponseGQLEntityType)
+  @UseGuards(JwtAuthenticationGuard)
+  async getSignedImage(@Args('input') input: SignedImageGQLInput) {
+    return this.storageS3.getSignedImage(input);
   }
 
   @Mutation(() => Boolean)

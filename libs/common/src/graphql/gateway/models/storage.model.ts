@@ -27,3 +27,13 @@ export class StorageCompleteResponseGQLEntityType {
   @Field()
   bucket: string;
 }
+
+@ObjectType()
+export class SignedImageResponseGQLEntityType {
+  @Field()
+  url: string;
+  @Field()
+  key: string;
+  @Field()
+  expiresAt: string;
+}

@@ -3,6 +3,7 @@ import {
   AbortMultipartUploadCommand,
   CompleteMultipartUploadCommand,
   CreateMultipartUploadCommand,
+  GetObjectCommand,
   S3Client,
   UploadPartCommand,
 } from '@aws-sdk/client-s3';
@@ -18,6 +19,8 @@ import { CreatePresignedUrlOutput } from '@app/common/services/storage/outputs/c
 import { CompleteUploadInput } from '@app/common/services/storage/inputs/complete-upload-input';
 import { CompleteUploadOutput } from '@app/common/services/storage/outputs/complete-upload-output';
 import { AbortUploadInput } from '@app/common/services/storage/inputs/abort-upload.input';
+import { SignedImageInput } from '@app/common/services/storage/inputs/get-signed-image-input';
+import { SignedImageOutput } from '@app/common/services/storage/outputs/get-signed-input-output';
 
 @Injectable()
 export class StorageService {
@@ -68,6 +71,26 @@ export class StorageService {
         response.UploadId,
         totalParts,
       ),
+    };
+  }
+
+  async getSignedImage({
+    key,
+    expiresIn = 3600,
+  }: SignedImageInput): Promise<SignedImageOutput> {
+    const command = new GetObjectCommand({
+      Bucket: this.bucketName,
+      Key: key,
+    });
+
+    const url = await getSignedUrl(this.s3Client, command, {
+      expiresIn,
+    });
+
+    return {
+      url,
+      key,
+      expiresAt: new Date(Date.now() + expiresIn * 1000).toISOString(),
     };
   }
 

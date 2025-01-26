@@ -63,6 +63,12 @@ type StorageCompleteResponseGQLEntityType {
   bucket: String!
 }
 
+type SignedImageResponseGQLEntityType {
+  url: String!
+  key: String!
+  expiresAt: String!
+}
+
 type Query {
   me: UserGQLEntityType!
   findWorkspaces: [WorkspaceGQLEntityType!]!
@@ -74,6 +80,7 @@ type Mutation {
   createWorkspace(input: CreateWorkspaceGQLInput!): WorkspaceGQLEntityType!
   initializeMultipartUpload(input: CreateFileGQLInput!): StorageInitializationResponseGQLEntityType!
   completeMultipartUpload(input: CompleteUploadGQLInput!): StorageCompleteResponseGQLEntityType!
+  getSignedImage(input: SignedImageGQLInput!): SignedImageResponseGQLEntityType!
   abortMultipartUpload(input: AbortUploadGQLInput!): Boolean!
 }
 
@@ -109,6 +116,11 @@ input CompleteUploadGQLInput {
 input CompleteUploadPartsGQLInput {
   partNumber: Int!
   etag: String!
+}
+
+input SignedImageGQLInput {
+  key: String!
+  expiresIn: Int
 }
 
 input AbortUploadGQLInput {

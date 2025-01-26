@@ -42,6 +42,11 @@ export class CompleteUploadPartsGQLInput {
     etag: string;
 }
 
+export class SignedImageGQLInput {
+    key: string;
+    expiresIn?: Nullable<number>;
+}
+
 export class AbortUploadGQLInput {
     key: string;
     uploadId: string;
@@ -103,6 +108,12 @@ export class StorageCompleteResponseGQLEntityType {
     bucket: string;
 }
 
+export class SignedImageResponseGQLEntityType {
+    url: string;
+    key: string;
+    expiresAt: string;
+}
+
 export abstract class IQuery {
     abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
 
@@ -119,6 +130,8 @@ export abstract class IMutation {
     abstract initializeMultipartUpload(input: CreateFileGQLInput): StorageInitializationResponseGQLEntityType | Promise<StorageInitializationResponseGQLEntityType>;
 
     abstract completeMultipartUpload(input: CompleteUploadGQLInput): StorageCompleteResponseGQLEntityType | Promise<StorageCompleteResponseGQLEntityType>;
+
+    abstract getSignedImage(input: SignedImageGQLInput): SignedImageResponseGQLEntityType | Promise<SignedImageResponseGQLEntityType>;
 
     abstract abortMultipartUpload(input: AbortUploadGQLInput): boolean | Promise<boolean>;
 }
