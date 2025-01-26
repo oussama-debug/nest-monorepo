@@ -6,15 +6,21 @@ import { UserGQLEntityType } from '@app/common/graphql/gateway/models/user.model
 import { WorkspaceGQLEntityType } from '@app/common/graphql/gateway/models/workspace.model';
 import { CreateWorkspaceGQLInput } from '@app/common/graphql/gateway/inputs/create-workspace-input';
 import { CustomerService } from './customer.service';
+import { AuthenticationService } from 'apps/gateway/src/authentication/authentication.service';
 
 @Resolver()
 export class CustomerResolver {
-  constructor(private readonly customerService: CustomerService) {}
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+    private readonly customerService: CustomerService,
+  ) {}
 
   @Query(() => UserGQLEntityType)
   @UseGuards(JwtAuthenticationGuard)
   async me(@UseUser() user) {
-    return user;
+    const me = await this.authenticationService.findUserById(user.id);
+
+    return me;
   }
 
   @Query(() => [WorkspaceGQLEntityType])

@@ -24,6 +24,29 @@ export class CreateWorkspaceGQLInput {
     description: string;
 }
 
+export class CreateFileGQLInput {
+    fileName: string;
+    fileType: string;
+    totalParts: number;
+    fileSize: number;
+}
+
+export class CompleteUploadGQLInput {
+    key: string;
+    uploadId: string;
+    parts: CompleteUploadPartsGQLInput[];
+}
+
+export class CompleteUploadPartsGQLInput {
+    partNumber: number;
+    etag: string;
+}
+
+export class AbortUploadGQLInput {
+    key: string;
+    uploadId: string;
+}
+
 export class WorkspaceGQLEntityType {
     id: string;
     name: string;
@@ -63,6 +86,23 @@ export class AuthenticationResponseGQLEntityType {
     user: UserGQLEntityType;
 }
 
+export class StoragePresignedURLGQLEntityType {
+    partNumber: number;
+    presignedUrl: string;
+}
+
+export class StorageInitializationResponseGQLEntityType {
+    uploadId: string;
+    key: string;
+    presignedUrls: StoragePresignedURLGQLEntityType[];
+}
+
+export class StorageCompleteResponseGQLEntityType {
+    location: string;
+    key: string;
+    bucket: string;
+}
+
 export abstract class IQuery {
     abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
 
@@ -75,6 +115,12 @@ export abstract class IMutation {
     abstract loginUser(input: AuthenticationGQLInput): AuthenticationResponseGQLEntityType | Promise<AuthenticationResponseGQLEntityType>;
 
     abstract createWorkspace(input: CreateWorkspaceGQLInput): WorkspaceGQLEntityType | Promise<WorkspaceGQLEntityType>;
+
+    abstract initializeMultipartUpload(input: CreateFileGQLInput): StorageInitializationResponseGQLEntityType | Promise<StorageInitializationResponseGQLEntityType>;
+
+    abstract completeMultipartUpload(input: CompleteUploadGQLInput): StorageCompleteResponseGQLEntityType | Promise<StorageCompleteResponseGQLEntityType>;
+
+    abstract abortMultipartUpload(input: AbortUploadGQLInput): boolean | Promise<boolean>;
 }
 
 export type DateTime = any;

@@ -46,6 +46,23 @@ type AuthenticationResponseGQLEntityType {
   user: UserGQLEntityType!
 }
 
+type StoragePresignedURLGQLEntityType {
+  partNumber: Int!
+  presignedUrl: String!
+}
+
+type StorageInitializationResponseGQLEntityType {
+  uploadId: String!
+  key: String!
+  presignedUrls: [StoragePresignedURLGQLEntityType!]!
+}
+
+type StorageCompleteResponseGQLEntityType {
+  location: String!
+  key: String!
+  bucket: String!
+}
+
 type Query {
   me: UserGQLEntityType!
   findWorkspaces: [WorkspaceGQLEntityType!]!
@@ -55,6 +72,9 @@ type Mutation {
   createUser(input: CreateUserGQLInput!): AuthenticationResponseGQLEntityType!
   loginUser(input: AuthenticationGQLInput!): AuthenticationResponseGQLEntityType!
   createWorkspace(input: CreateWorkspaceGQLInput!): WorkspaceGQLEntityType!
+  initializeMultipartUpload(input: CreateFileGQLInput!): StorageInitializationResponseGQLEntityType!
+  completeMultipartUpload(input: CompleteUploadGQLInput!): StorageCompleteResponseGQLEntityType!
+  abortMultipartUpload(input: AbortUploadGQLInput!): Boolean!
 }
 
 input CreateUserGQLInput {
@@ -71,4 +91,27 @@ input AuthenticationGQLInput {
 input CreateWorkspaceGQLInput {
   name: String!
   description: String!
+}
+
+input CreateFileGQLInput {
+  fileName: String!
+  fileType: String!
+  totalParts: Int!
+  fileSize: Int!
+}
+
+input CompleteUploadGQLInput {
+  key: String!
+  uploadId: String!
+  parts: [CompleteUploadPartsGQLInput!]!
+}
+
+input CompleteUploadPartsGQLInput {
+  partNumber: Int!
+  etag: String!
+}
+
+input AbortUploadGQLInput {
+  key: String!
+  uploadId: String!
 }
