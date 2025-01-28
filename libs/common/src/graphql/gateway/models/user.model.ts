@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { MembershipGQLEntityType } from './membership.model';
 
 export enum UserType {
@@ -34,4 +34,16 @@ export class UserGQLEntityType {
 
   @Field(() => [MembershipGQLEntityType], { nullable: true })
   memberships?: MembershipGQLEntityType[];
+}
+
+@ObjectType()
+export class StripeAccountResponseGQLEntityType {
+  @Field(() => Int)
+  created: number;
+
+  @Field(() => Int)
+  expires_at: number;
+
+  @Field()
+  url: string;
 }

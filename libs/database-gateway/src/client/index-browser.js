@@ -147,7 +147,11 @@ exports.Prisma.WorkspaceScalarFieldEnum = {
   updatedAt: 'updatedAt',
   subdomain: 'subdomain',
   reference: 'reference',
-  stripe_account_id: 'stripe_account_id'
+  services: 'services',
+  stripe_account_id: 'stripe_account_id',
+  stripe_account_verified: 'stripe_account_verified',
+  stripe_account_disabled: 'stripe_account_disabled',
+  stripe_account_disable_reason: 'stripe_account_disable_reason'
 };
 
 exports.Prisma.SortOrder = {

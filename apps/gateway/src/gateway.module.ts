@@ -3,11 +3,16 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { Client, ClientsModule, Transport } from '@nestjs/microservices';
 
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CustomerModule } from './customer/customer.module';
 import { ProductModule } from './product/product.module';
 import { StorageModule } from './storage/storage.module';
+import { WebhookController } from './webhook.controller';
+import { StripeService } from '@app/common/services/stripe';
+import { PrismaService } from 'libs/database-gateway/src';
+import { WebhookService } from './webhook.service';
 
 @Module({
   imports: [
@@ -32,12 +37,30 @@ import { StorageModule } from './storage/storage.module';
         };
       },
     }),
+    ClientsModule.registerAsync({
+      isGlobal: true,
+      clients: [
+        {
+          inject: [ConfigService],
+          name: 'product_service',
+          useFactory: async (configService: ConfigService) => ({
+            transport: Transport.REDIS,
+            options: {
+              host: configService.getOrThrow('GATEWAY_BUS_URL') as string,
+              port: parseInt(
+                configService.getOrThrow('GATEWAY_BUS_PORT') as string,
+              ),
+            },
+          }),
+        },
+      ],
+    }),
     AuthenticationModule,
     CustomerModule,
     ProductModule,
     StorageModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [WebhookController],
+  providers: [StripeService, PrismaService, WebhookService],
 })
 export class GatewayModule {}

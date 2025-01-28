@@ -8,6 +8,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum chargeType {
+  one_time
+  recurring
+}
+
+enum packageType {
+  flat
+  package
+}
+
 model Product {
   id          String   @id @default(uuid()) @db.Uuid
   createdAt   DateTime @default(now()) @db.Timestamptz
@@ -16,9 +26,42 @@ model Product {
 
   name        String
   description String
-  published   Boolean @default(false)
+  published   Boolean   @default(false)
+  pricings    Pricing[]
 
   @@index([workspaceId])
   @@index([userId])
   @@map("products")
+}
+
+model Pricing {
+  id           String      @id @default(uuid()) @db.Uuid
+  amount       BigInt      @default(0)
+  charge_type  chargeType  @default(one_time)
+  package_type packageType @default(flat)
+  workspaceId  String      @db.Uuid
+  userId       String      @db.Uuid
+
+  createdAt DateTime @default(now()) @db.Timestamptz
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.Uuid
+
+  tax          PricingTax? @relation(fields: [pricingTaxId], references: [id])
+  pricingTaxId String?     @db.Uuid
+
+  @@index([workspaceId])
+  @@index([userId])
+  @@map("pricings")
+}
+
+model PricingTax {
+  id        String    @id @default(uuid()) @db.Uuid
+  createdAt DateTime  @default(now()) @db.Timestamptz
+  pricings  Pricing[]
+
+  country String
+  total   Decimal @default(0.0)
+  state   String
+
+  @@map("pricing_taxes")
 }

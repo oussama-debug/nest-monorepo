@@ -5,13 +5,13 @@ import {
   StorageCompleteResponseGQLEntityType,
   StorageInitializationResponseGQLEntityType,
 } from '@app/common/graphql/gateway/models/storage.model';
-import { CreateFileGQLInput } from '@app/common/graphql/gateway/inputs/create-file-input';
+import { CreateFileGQLInput } from '@app/common/graphql/gateway/inputs/create/create-file-input';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthenticationGuard } from '../common/guards/graphql.guard';
 import { InvalidFileSizeGQLError } from '@app/common/graphql/gateway/errors/invalid-file-size';
-import { CompleteUploadGQLInput } from '@app/common/graphql/gateway/inputs/complete-upload-input';
-import { AbortUploadGQLInput } from '@app/common/graphql/gateway/inputs/abort-upload-input';
-import { SignedImageGQLInput } from '@app/common/graphql/gateway/inputs/get-signed-image-input';
+import { CompleteUploadGQLInput } from '@app/common/graphql/gateway/inputs/create/complete-upload-input';
+import { AbortUploadGQLInput } from '@app/common/graphql/gateway/inputs/create/abort-upload-input';
+import { SignedImageGQLInput } from '@app/common/graphql/gateway/inputs/get/get-signed-image-input';
 
 @Resolver()
 export class StorageResolver {

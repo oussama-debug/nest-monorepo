@@ -8,8 +8,12 @@ type WorkspaceGQLEntityType {
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  services: [String!]!
   subdomain: String!
   reference: String!
+  stripe_account_verified: Boolean!
+  stripe_account_disabled: Boolean!
+  stripe_account_disable_reason: String
   memberships: [MembershipGQLEntityType!]
 }
 
@@ -41,9 +45,49 @@ type UserGQLEntityType {
   memberships: [MembershipGQLEntityType!]
 }
 
+type StripeAccountResponseGQLEntityType {
+  created: Int!
+  expires_at: Int!
+  url: String!
+}
+
 type AuthenticationResponseGQLEntityType {
   access_token: String!
   user: UserGQLEntityType!
+}
+
+type PricingTax {
+  id: ID!
+  country: String!
+  total: Float!
+  state: String!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  published: Boolean!
+  pricings: [Pricing!]
+}
+
+type Pricing {
+  id: ID!
+  amount: Float!
+  chargeType: ChargeType!
+  packageType: PackageType!
+  product: Product
+  tax: PricingTax
+}
+
+enum ChargeType {
+  ONE_TIME
+  RECURRING
+}
+
+enum PackageType {
+  FLAT
+  PACKAGE
 }
 
 type StoragePresignedURLGQLEntityType {
@@ -78,6 +122,11 @@ type Mutation {
   createUser(input: CreateUserGQLInput!): AuthenticationResponseGQLEntityType!
   loginUser(input: AuthenticationGQLInput!): AuthenticationResponseGQLEntityType!
   createWorkspace(input: CreateWorkspaceGQLInput!): WorkspaceGQLEntityType!
+  createAccountLink: StripeAccountResponseGQLEntityType!
+  createPricing(input: PricingCreateGQLInput!): Boolean!
+  createTax(input: PricingTaxCreateGQLInput!): Boolean!
+  createProduct(input: ProductCreateGQLInput!): Boolean!
+  createCategory(input: CategoryCreateGQLInput!): Boolean!
   initializeMultipartUpload(input: CreateFileGQLInput!): StorageInitializationResponseGQLEntityType!
   completeMultipartUpload(input: CompleteUploadGQLInput!): StorageCompleteResponseGQLEntityType!
   getSignedImage(input: SignedImageGQLInput!): SignedImageResponseGQLEntityType!
@@ -98,6 +147,35 @@ input AuthenticationGQLInput {
 input CreateWorkspaceGQLInput {
   name: String!
   description: String!
+  country: String!
+  services: [String!]!
+}
+
+input PricingCreateGQLInput {
+  amount: Float!
+  chargeType: ChargeType! = ONE_TIME
+  packageType: PackageType! = FLAT
+}
+
+input PricingTaxCreateGQLInput {
+  country: String!
+  total: Float! = 0
+  state: String!
+}
+
+input ProductCreateGQLInput {
+  name: String!
+  description: String!
+  productImage: String
+  productPricingId: String!
+  productPricingTaxId: String!
+  published: Boolean! = false
+}
+
+input CategoryCreateGQLInput {
+  name: String!
+  description: String!
+  published: Boolean! = false
 }
 
 input CreateFileGQLInput {

@@ -49,8 +49,12 @@ model Workspace {
   updatedAt DateTime @default(now()) @updatedAt
   subdomain String   @unique
   reference String   @unique
+  services  String[]
 
-  stripe_account_id String?
+  stripe_account_id             String?
+  stripe_account_verified       Boolean @default(false)
+  stripe_account_disabled       Boolean @default(false)
+  stripe_account_disable_reason String?
 
   memberships Membership[]
 

@@ -1,7 +1,6 @@
-export type CreateStripeAccountInput = {
-  type?: 'custom' | 'express' | 'standard';
+export interface CreateStripeAccountInput {
   email: string;
   name: string;
   companyType?: 'individual' | 'company';
   country?: string;
-};
+}

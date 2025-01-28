@@ -127,6 +127,26 @@ exports.Prisma.ProductScalarFieldEnum = {
   published: 'published'
 };
 
+exports.Prisma.PricingScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  charge_type: 'charge_type',
+  package_type: 'package_type',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  productId: 'productId',
+  pricingTaxId: 'pricingTaxId'
+};
+
+exports.Prisma.PricingTaxScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  country: 'country',
+  total: 'total',
+  state: 'state'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -137,9 +157,24 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.chargeType = exports.$Enums.chargeType = {
+  one_time: 'one_time',
+  recurring: 'recurring'
+};
+
+exports.packageType = exports.$Enums.packageType = {
+  flat: 'flat',
+  package: 'package'
+};
 
 exports.Prisma.ModelName = {
-  Product: 'Product'
+  Product: 'Product',
+  Pricing: 'Pricing',
+  PricingTax: 'PricingTax'
 };
 
 /**

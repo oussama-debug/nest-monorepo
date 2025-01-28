@@ -7,4 +7,10 @@ export class CreateWorkspaceGQLInput {
 
   @Field()
   description: string;
+
+  @Field()
+  country: string;
+
+  @Field(() => [String])
+  services: string[];
 }

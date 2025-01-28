@@ -19,9 +19,14 @@ export class CustomerService {
   async createWorkspace(
     input: CreateWorkspaceInput,
   ): Promise<Workspace | null> {
+    const subdomain = generateSubdomain({
+      wordCount: 3,
+      includeNumbers: true,
+      numberLength: 6,
+    });
+
     const stripe_account = await this.stripeService.createWorkspaceAccount({
-      type: 'express',
-      name: input.name,
+      name: subdomain,
       country: 'CA',
       companyType: 'individual',
       email: input.ownerUsername,
@@ -31,11 +36,8 @@ export class CustomerService {
       data: {
         name: input.name,
         description: input.description,
-        subdomain: generateSubdomain({
-          wordCount: 3,
-          includeNumbers: true,
-          numberLength: 6,
-        }),
+        subdomain: subdomain,
+        services: input.services,
         reference: `${crypto.randomUUID()}_${nanoid()}_workspace`,
         memberships: {
           create: {

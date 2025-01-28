@@ -1,4 +1,5 @@
-import { IsString } from 'class-validator';
+import { allowedCountries } from '@app/common/constants/countries';
+import { IsArray, IsEnum, IsString } from 'class-validator';
 
 export class CreateWorkspaceInput {
   @IsString()
@@ -12,4 +13,11 @@ export class CreateWorkspaceInput {
 
   @IsString()
   ownerUsername: string;
+
+  @IsString()
+  @IsEnum(allowedCountries)
+  country: string;
+
+  @IsArray()
+  services: string[];
 }

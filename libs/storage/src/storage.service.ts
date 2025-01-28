@@ -12,14 +12,14 @@ import {
   StorageModuleOptions,
 } from '@app/common/services/storage/storage.options';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { CreateUploadInput } from '@app/common/services/storage/inputs/create-upload-input';
+import { CreateUploadInput } from '@app/common/services/storage/inputs/create/create-upload-input';
 import { v4 } from 'uuid';
 import { UploadInitializationOutput } from '@app/common/services/storage/outputs/create-upload-output';
 import { CreatePresignedUrlOutput } from '@app/common/services/storage/outputs/create-presigned-url-output';
-import { CompleteUploadInput } from '@app/common/services/storage/inputs/complete-upload-input';
+import { CompleteUploadInput } from '@app/common/services/storage/inputs/create/complete-upload-input';
 import { CompleteUploadOutput } from '@app/common/services/storage/outputs/complete-upload-output';
-import { AbortUploadInput } from '@app/common/services/storage/inputs/abort-upload.input';
-import { SignedImageInput } from '@app/common/services/storage/inputs/get-signed-image-input';
+import { AbortUploadInput } from '@app/common/services/storage/inputs/create/abort-upload.input';
+import { SignedImageInput } from '@app/common/services/storage/inputs/get/get-signed-image-input';
 import { SignedImageOutput } from '@app/common/services/storage/outputs/get-signed-input-output';
 
 @Injectable()
