@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsString } from 'class-validator';
 
 export class CategoryCreateInput {
   @IsString()
@@ -9,4 +9,10 @@ export class CategoryCreateInput {
 
   @IsBoolean()
   is_published: boolean;
+
+  @IsString()
+  workspace_id: string;
+
+  @IsString()
+  user_id: string;
 }

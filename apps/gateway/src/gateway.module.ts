@@ -27,11 +27,14 @@ import { WebhookService } from './webhook.service';
             path: join(process.cwd(), 'apps/gateway/src/graphql.ts'),
             outputAs: 'class',
           },
+          cors: {
+            origin: 'http://localhost:3000',
+            credentials: true,
+          },
           autoSchemaFile: join(process.cwd(), 'apps/gateway/schema.gql'),
           installSubscriptionHandlers: true,
           playground: configService.getOrThrow('NODE_ENV') === 'development',
           debug: configService.getOrThrow('NODE_ENV') === 'development',
-          cors: true,
           context: ({ req }) => ({ req }),
           introspection: configService.getOrThrow('NODE_ENV') === 'development',
         };

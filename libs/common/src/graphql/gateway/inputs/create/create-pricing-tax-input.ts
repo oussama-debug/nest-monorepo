@@ -1,13 +1,13 @@
 import { Field, Float, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class PricingTaxCreateGQLInput {
+export class PricingFeeCreateGQLInput {
   @Field()
-  country: string;
+  description: string;
 
   @Field(() => Float, { defaultValue: 0.0 })
   total?: number;
 
   @Field()
-  state: string;
+  name: string;
 }

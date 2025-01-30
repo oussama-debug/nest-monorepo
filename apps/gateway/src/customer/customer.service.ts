@@ -59,4 +59,16 @@ export class CustomerService {
       include: { memberships: true },
     });
   }
+
+  async findCustomers(ids: string[]) {
+    return await this.databaseService.user.findMany({
+      where: { id: { in: ids } },
+    });
+  }
+
+  async findWorkspaces(ids: string[]) {
+    return await this.databaseService.workspace.findMany({
+      where: { id: { in: ids } },
+    });
+  }
 }

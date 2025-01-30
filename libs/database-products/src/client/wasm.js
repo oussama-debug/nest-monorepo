@@ -18,11 +18,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 6.2.1
- * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
+ * Query Engine version: acc0b9dd43eb689cbd20c9470515d719db10d0b0
  */
 Prisma.prismaVersion = {
   client: "6.2.1",
-  engine: "4123509d24aa4dede1e864b46351bf2790323b69"
+  engine: "acc0b9dd43eb689cbd20c9470515d719db10d0b0"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -117,6 +117,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  published: 'published',
+  slug: 'slug'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -124,7 +135,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   userId: 'userId',
   name: 'name',
   description: 'description',
-  published: 'published'
+  published: 'published',
+  categoryId: 'categoryId'
 };
 
 exports.Prisma.PricingScalarFieldEnum = {
@@ -135,16 +147,15 @@ exports.Prisma.PricingScalarFieldEnum = {
   workspaceId: 'workspaceId',
   userId: 'userId',
   createdAt: 'createdAt',
-  productId: 'productId',
-  pricingTaxId: 'pricingTaxId'
+  productId: 'productId'
 };
 
-exports.Prisma.PricingTaxScalarFieldEnum = {
+exports.Prisma.PricingFeeScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
-  country: 'country',
-  total: 'total',
-  state: 'state'
+  name: 'name',
+  description: 'description',
+  total: 'total'
 };
 
 exports.Prisma.SortOrder = {
@@ -172,9 +183,10 @@ exports.packageType = exports.$Enums.packageType = {
 };
 
 exports.Prisma.ModelName = {
+  Category: 'Category',
   Product: 'Product',
   Pricing: 'Pricing',
-  PricingTax: 'PricingTax'
+  PricingFee: 'PricingFee'
 };
 
 /**

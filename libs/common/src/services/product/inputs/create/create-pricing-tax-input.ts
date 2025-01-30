@@ -1,13 +1,13 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class PricingTaxCreateInput {
-  @IsString()
-  country: string;
-
+export class PricingFeeCreateInput {
   @IsNumber()
   @IsOptional()
   total?: number;
 
   @IsString()
-  state: string;
+  name: string;
+
+  @IsString()
+  description: string;
 }

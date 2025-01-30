@@ -18,6 +18,22 @@ enum packageType {
   package
 }
 
+model Category {
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now()) @db.Timestamptz
+  workspaceId String   @db.Uuid
+  userId      String   @db.Uuid
+
+  name        String
+  description String  @db.Text
+  published   Boolean @default(false)
+  slug        String  @unique
+
+  products Product[]
+
+  @@map("categories")
+}
+
 model Product {
   id          String   @id @default(uuid()) @db.Uuid
   createdAt   DateTime @default(now()) @db.Timestamptz
@@ -28,6 +44,9 @@ model Product {
   description String
   published   Boolean   @default(false)
   pricings    Pricing[]
+
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?   @db.Uuid
 
   @@index([workspaceId])
   @@index([userId])
@@ -46,22 +65,22 @@ model Pricing {
   product   Product? @relation(fields: [productId], references: [id])
   productId String?  @db.Uuid
 
-  tax          PricingTax? @relation(fields: [pricingTaxId], references: [id])
-  pricingTaxId String?     @db.Uuid
+  fees PricingFee[]
 
   @@index([workspaceId])
   @@index([userId])
   @@map("pricings")
 }
 
-model PricingTax {
+model PricingFee {
   id        String    @id @default(uuid()) @db.Uuid
   createdAt DateTime  @default(now()) @db.Timestamptz
   pricings  Pricing[]
 
-  country String
-  total   Decimal @default(0.0)
-  state   String
+  name String
 
-  @@map("pricing_taxes")
+  description String?
+  total       Decimal @default(0.0)
+
+  @@map("pricing_fees")
 }

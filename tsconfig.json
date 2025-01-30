@@ -18,24 +18,14 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/prisma": [
-        "libs/prisma/src"
-      ],
-      "@app/prisma/*": [
-        "libs/prisma/src/*"
-      ],
-      "@app/common": [
-        "libs/common/src"
-      ],
-      "@app/common/*": [
-        "libs/common/src/*"
-      ],
-      "@app/storage": [
-        "libs/storage/src"
-      ],
-      "@app/storage/*": [
-        "libs/storage/src/*"
-      ]
+      "@app/database-gateway": ["libs/database-gateway/src"],
+      "@app/database-gateway/*": ["libs/database-gateway/src/*"],
+      "@app/database-products": ["libs/database-products/src"],
+      "@app/database-products/*": ["libs/database-products/src/*"],
+      "@app/common": ["libs/common/src"],
+      "@app/common/*": ["libs/common/src/*"],
+      "@app/storage": ["libs/storage/src"],
+      "@app/storage/*": ["libs/storage/src/*"]
     }
   }
 }

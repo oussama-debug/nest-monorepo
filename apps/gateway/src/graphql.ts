@@ -42,10 +42,10 @@ export class PricingCreateGQLInput {
     packageType: PackageType;
 }
 
-export class PricingTaxCreateGQLInput {
-    country: string;
+export class PricingFeeCreateGQLInput {
+    description: string;
     total: number;
-    state: string;
+    name: string;
 }
 
 export class ProductCreateGQLInput {
@@ -140,28 +140,39 @@ export class AuthenticationResponseGQLEntityType {
     user: UserGQLEntityType;
 }
 
-export class PricingTax {
+export class PricingFeeGQLEntityType {
     id: string;
-    country: string;
+    description: string;
     total: number;
-    state: string;
+    name: string;
 }
 
-export class Product {
+export class CategoryGQLEntityType {
+    id: string;
+    name: string;
+    description: string;
+    slug: string;
+    published: boolean;
+    creator: UserGQLEntityType;
+    workspace: WorkspaceGQLEntityType;
+    products: ProductGQLEntityType[];
+}
+
+export class ProductGQLEntityType {
     id: string;
     name: string;
     description: string;
     published: boolean;
-    pricings?: Nullable<Pricing[]>;
+    pricings?: Nullable<PricingGQLEntityType[]>;
 }
 
-export class Pricing {
+export class PricingGQLEntityType {
     id: string;
     amount: number;
     chargeType: ChargeType;
     packageType: PackageType;
-    product?: Nullable<Product>;
-    tax?: Nullable<PricingTax>;
+    product?: Nullable<ProductGQLEntityType>;
+    fees?: Nullable<PricingFeeGQLEntityType[]>;
 }
 
 export class StoragePresignedURLGQLEntityType {
@@ -191,6 +202,8 @@ export abstract class IQuery {
     abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
 
     abstract findWorkspaces(): WorkspaceGQLEntityType[] | Promise<WorkspaceGQLEntityType[]>;
+
+    abstract categories(): CategoryGQLEntityType[] | Promise<CategoryGQLEntityType[]>;
 }
 
 export abstract class IMutation {
@@ -202,13 +215,13 @@ export abstract class IMutation {
 
     abstract createAccountLink(): StripeAccountResponseGQLEntityType | Promise<StripeAccountResponseGQLEntityType>;
 
-    abstract createPricing(input: PricingCreateGQLInput): boolean | Promise<boolean>;
+    abstract createPricing(input: PricingCreateGQLInput): PricingGQLEntityType | Promise<PricingGQLEntityType>;
 
-    abstract createTax(input: PricingTaxCreateGQLInput): boolean | Promise<boolean>;
+    abstract createFee(input: PricingFeeCreateGQLInput): PricingFeeGQLEntityType | Promise<PricingFeeGQLEntityType>;
 
-    abstract createProduct(input: ProductCreateGQLInput): boolean | Promise<boolean>;
+    abstract createProduct(input: ProductCreateGQLInput): ProductGQLEntityType | Promise<ProductGQLEntityType>;
 
-    abstract createCategory(input: CategoryCreateGQLInput): boolean | Promise<boolean>;
+    abstract createCategory(input: CategoryCreateGQLInput): CategoryGQLEntityType | Promise<CategoryGQLEntityType>;
 
     abstract initializeMultipartUpload(input: CreateFileGQLInput): StorageInitializationResponseGQLEntityType | Promise<StorageInitializationResponseGQLEntityType>;
 

@@ -5,6 +5,8 @@ import {
   ObjectType,
   registerEnumType,
 } from '@nestjs/graphql';
+import { UserGQLEntityType } from '@app/common/graphql/gateway/models/user.model';
+import { WorkspaceGQLEntityType } from '@app/common/graphql/gateway/models/workspace.model';
 
 export enum ChargeType {
   ONE_TIME = 'ONE_TIME',
@@ -20,22 +22,49 @@ registerEnumType(ChargeType, { name: 'ChargeType' });
 registerEnumType(PackageType, { name: 'PackageType' });
 
 @ObjectType()
-export class PricingTax {
+export class PricingFeeGQLEntityType {
   @Field(() => ID)
   id: string;
 
   @Field()
-  country: string;
+  description: string;
 
   @Field(() => Float)
   total: number;
 
   @Field()
-  state: string;
+  name: string;
 }
 
 @ObjectType()
-export class Category {
+export class CategoryGQLEntityType {
+  @Field(() => ID)
+  id: string;
+
+  @Field()
+  name: string;
+
+  @Field()
+  description: string;
+
+  @Field()
+  slug: string;
+
+  @Field()
+  published: boolean;
+
+  @Field(() => UserGQLEntityType)
+  creator: UserGQLEntityType;
+
+  @Field(() => WorkspaceGQLEntityType)
+  workspace: WorkspaceGQLEntityType;
+
+  @Field(() => [ProductGQLEntityType])
+  products: ProductGQLEntityType[];
+}
+
+@ObjectType()
+export class ProductGQLEntityType {
   @Field(() => ID)
   id: string;
 
@@ -47,28 +76,13 @@ export class Category {
 
   @Field()
   published: boolean;
+
+  @Field(() => [PricingGQLEntityType], { nullable: true })
+  pricings?: PricingGQLEntityType[];
 }
 
 @ObjectType()
-export class Product {
-  @Field(() => ID)
-  id: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  description: string;
-
-  @Field()
-  published: boolean;
-
-  @Field(() => [Pricing], { nullable: true })
-  pricings?: Pricing[];
-}
-
-@ObjectType()
-export class Pricing {
+export class PricingGQLEntityType {
   @Field(() => ID)
   id: string;
 
@@ -81,9 +95,9 @@ export class Pricing {
   @Field(() => PackageType)
   packageType: PackageType;
 
-  @Field(() => Product, { nullable: true })
-  product?: Product;
+  @Field(() => ProductGQLEntityType, { nullable: true })
+  product?: ProductGQLEntityType;
 
-  @Field(() => PricingTax, { nullable: true })
-  tax?: PricingTax;
+  @Field(() => [PricingFeeGQLEntityType], { nullable: true })
+  fees: PricingFeeGQLEntityType[];
 }

@@ -56,28 +56,39 @@ type AuthenticationResponseGQLEntityType {
   user: UserGQLEntityType!
 }
 
-type PricingTax {
+type PricingFeeGQLEntityType {
   id: ID!
-  country: String!
+  description: String!
   total: Float!
-  state: String!
+  name: String!
 }
 
-type Product {
+type CategoryGQLEntityType {
+  id: ID!
+  name: String!
+  description: String!
+  slug: String!
+  published: Boolean!
+  creator: UserGQLEntityType!
+  workspace: WorkspaceGQLEntityType!
+  products: [ProductGQLEntityType!]!
+}
+
+type ProductGQLEntityType {
   id: ID!
   name: String!
   description: String!
   published: Boolean!
-  pricings: [Pricing!]
+  pricings: [PricingGQLEntityType!]
 }
 
-type Pricing {
+type PricingGQLEntityType {
   id: ID!
   amount: Float!
   chargeType: ChargeType!
   packageType: PackageType!
-  product: Product
-  tax: PricingTax
+  product: ProductGQLEntityType
+  fees: [PricingFeeGQLEntityType!]
 }
 
 enum ChargeType {
@@ -116,6 +127,7 @@ type SignedImageResponseGQLEntityType {
 type Query {
   me: UserGQLEntityType!
   findWorkspaces: [WorkspaceGQLEntityType!]!
+  categories: [CategoryGQLEntityType!]!
 }
 
 type Mutation {
@@ -123,10 +135,10 @@ type Mutation {
   loginUser(input: AuthenticationGQLInput!): AuthenticationResponseGQLEntityType!
   createWorkspace(input: CreateWorkspaceGQLInput!): WorkspaceGQLEntityType!
   createAccountLink: StripeAccountResponseGQLEntityType!
-  createPricing(input: PricingCreateGQLInput!): Boolean!
-  createTax(input: PricingTaxCreateGQLInput!): Boolean!
-  createProduct(input: ProductCreateGQLInput!): Boolean!
-  createCategory(input: CategoryCreateGQLInput!): Boolean!
+  createPricing(input: PricingCreateGQLInput!): PricingGQLEntityType!
+  createFee(input: PricingFeeCreateGQLInput!): PricingFeeGQLEntityType!
+  createProduct(input: ProductCreateGQLInput!): ProductGQLEntityType!
+  createCategory(input: CategoryCreateGQLInput!): CategoryGQLEntityType!
   initializeMultipartUpload(input: CreateFileGQLInput!): StorageInitializationResponseGQLEntityType!
   completeMultipartUpload(input: CompleteUploadGQLInput!): StorageCompleteResponseGQLEntityType!
   getSignedImage(input: SignedImageGQLInput!): SignedImageResponseGQLEntityType!
@@ -157,10 +169,10 @@ input PricingCreateGQLInput {
   packageType: PackageType! = FLAT
 }
 
-input PricingTaxCreateGQLInput {
-  country: String!
+input PricingFeeCreateGQLInput {
+  description: String!
   total: Float! = 0
-  state: String!
+  name: String!
 }
 
 input ProductCreateGQLInput {
