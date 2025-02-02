@@ -8,8 +8,9 @@ async function bootstrap() {
     {
       transport: Transport.REDIS,
       options: {
-        host: process.env.GATEWAY_BUS_URL as string,
-        port: parseInt(process.env.GATEWAY_BUS_PORT as string),
+        url: process.env.GATEWAY_BUS_URL as string,
+        retryAttempts: 5,
+        retryDelay: 1000,
       },
     },
   );
