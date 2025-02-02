@@ -6,6 +6,6 @@ async function bootstrap() {
   app.setGlobalPrefix('v1');
   app.enableCors();
   app.enableShutdownHooks();
-  await app.listen(process.env.port ?? 4000);
+  await app.listen(4000);
 }
 bootstrap();
