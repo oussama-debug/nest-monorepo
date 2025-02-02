@@ -18,11 +18,23 @@ export class WorkspaceGQLEntityType {
   @Field()
   updatedAt: Date;
 
+  @Field(() => [String])
+  services: string[];
+
   @Field()
   subdomain: string;
 
   @Field()
   reference: string;
+
+  @Field(() => Boolean)
+  stripe_account_verified: boolean;
+
+  @Field(() => Boolean)
+  stripe_account_disabled: boolean;
+
+  @Field({ nullable: true })
+  stripe_account_disable_reason?: string;
 
   @Field(() => [MembershipGQLEntityType], { nullable: true })
   memberships?: MembershipGQLEntityType[];

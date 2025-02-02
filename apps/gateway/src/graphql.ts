@@ -8,6 +8,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum ChargeType {
+    ONE_TIME = "ONE_TIME",
+    RECURRING = "RECURRING"
+}
+
+export enum PackageType {
+    FLAT = "FLAT",
+    PACKAGE = "PACKAGE"
+}
+
 export class CreateUserGQLInput {
     username: string;
     password: string;
@@ -22,6 +32,35 @@ export class AuthenticationGQLInput {
 export class CreateWorkspaceGQLInput {
     name: string;
     description: string;
+    country: string;
+    services: string[];
+}
+
+export class PricingCreateGQLInput {
+    amount: number;
+    chargeType: ChargeType;
+    packageType: PackageType;
+}
+
+export class PricingFeeCreateGQLInput {
+    description: string;
+    total: number;
+    name: string;
+}
+
+export class ProductCreateGQLInput {
+    name: string;
+    description: string;
+    productImage?: Nullable<string>;
+    productPricingId: string;
+    productPricingTaxId: string;
+    published: boolean;
+}
+
+export class CategoryCreateGQLInput {
+    name: string;
+    description: string;
+    published: boolean;
 }
 
 export class CreateFileGQLInput {
@@ -58,8 +97,12 @@ export class WorkspaceGQLEntityType {
     description: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+    services: string[];
     subdomain: string;
     reference: string;
+    stripe_account_verified: boolean;
+    stripe_account_disabled: boolean;
+    stripe_account_disable_reason?: Nullable<string>;
     memberships?: Nullable<MembershipGQLEntityType[]>;
 }
 
@@ -86,9 +129,50 @@ export class UserGQLEntityType {
     memberships?: Nullable<MembershipGQLEntityType[]>;
 }
 
+export class StripeAccountResponseGQLEntityType {
+    created: number;
+    expires_at: number;
+    url: string;
+}
+
 export class AuthenticationResponseGQLEntityType {
     access_token: string;
     user: UserGQLEntityType;
+}
+
+export class PricingFeeGQLEntityType {
+    id: string;
+    description: string;
+    total: number;
+    name: string;
+}
+
+export class CategoryGQLEntityType {
+    id: string;
+    name: string;
+    description: string;
+    slug: string;
+    published: boolean;
+    creator: UserGQLEntityType;
+    workspace: WorkspaceGQLEntityType;
+    products: ProductGQLEntityType[];
+}
+
+export class ProductGQLEntityType {
+    id: string;
+    name: string;
+    description: string;
+    published: boolean;
+    pricings?: Nullable<PricingGQLEntityType[]>;
+}
+
+export class PricingGQLEntityType {
+    id: string;
+    amount: number;
+    chargeType: ChargeType;
+    packageType: PackageType;
+    product?: Nullable<ProductGQLEntityType>;
+    fees?: Nullable<PricingFeeGQLEntityType[]>;
 }
 
 export class StoragePresignedURLGQLEntityType {
@@ -118,6 +202,8 @@ export abstract class IQuery {
     abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
 
     abstract findWorkspaces(): WorkspaceGQLEntityType[] | Promise<WorkspaceGQLEntityType[]>;
+
+    abstract categories(): CategoryGQLEntityType[] | Promise<CategoryGQLEntityType[]>;
 }
 
 export abstract class IMutation {
@@ -126,6 +212,16 @@ export abstract class IMutation {
     abstract loginUser(input: AuthenticationGQLInput): AuthenticationResponseGQLEntityType | Promise<AuthenticationResponseGQLEntityType>;
 
     abstract createWorkspace(input: CreateWorkspaceGQLInput): WorkspaceGQLEntityType | Promise<WorkspaceGQLEntityType>;
+
+    abstract createAccountLink(): StripeAccountResponseGQLEntityType | Promise<StripeAccountResponseGQLEntityType>;
+
+    abstract createPricing(input: PricingCreateGQLInput): PricingGQLEntityType | Promise<PricingGQLEntityType>;
+
+    abstract createFee(input: PricingFeeCreateGQLInput): PricingFeeGQLEntityType | Promise<PricingFeeGQLEntityType>;
+
+    abstract createProduct(input: ProductCreateGQLInput): ProductGQLEntityType | Promise<ProductGQLEntityType>;
+
+    abstract createCategory(input: CategoryCreateGQLInput): CategoryGQLEntityType | Promise<CategoryGQLEntityType>;
 
     abstract initializeMultipartUpload(input: CreateFileGQLInput): StorageInitializationResponseGQLEntityType | Promise<StorageInitializationResponseGQLEntityType>;
 

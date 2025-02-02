@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
+import { ConfigModule } from '@nestjs/config';
+import { PrismaService } from '@app/database-products/index';
 
 @Module({
-  imports: [],
+  imports: [ConfigModule.forRoot({ isGlobal: true })],
   controllers: [ProductsController],
-  providers: [ProductsService],
+  providers: [ProductsService, PrismaService],
 })
 export class ProductsModule {}

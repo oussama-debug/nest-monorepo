@@ -18,11 +18,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 6.2.1
- * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
+ * Query Engine version: acc0b9dd43eb689cbd20c9470515d719db10d0b0
  */
 Prisma.prismaVersion = {
   client: "6.2.1",
-  engine: "4123509d24aa4dede1e864b46351bf2790323b69"
+  engine: "acc0b9dd43eb689cbd20c9470515d719db10d0b0"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -117,6 +117,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  published: 'published',
+  slug: 'slug'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -124,7 +135,27 @@ exports.Prisma.ProductScalarFieldEnum = {
   userId: 'userId',
   name: 'name',
   description: 'description',
-  published: 'published'
+  published: 'published',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.PricingScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  charge_type: 'charge_type',
+  package_type: 'package_type',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  productId: 'productId'
+};
+
+exports.Prisma.PricingFeeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  name: 'name',
+  description: 'description',
+  total: 'total'
 };
 
 exports.Prisma.SortOrder = {
@@ -137,9 +168,25 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.chargeType = exports.$Enums.chargeType = {
+  one_time: 'one_time',
+  recurring: 'recurring'
+};
+
+exports.packageType = exports.$Enums.packageType = {
+  flat: 'flat',
+  package: 'package'
+};
 
 exports.Prisma.ModelName = {
-  Product: 'Product'
+  Category: 'Category',
+  Product: 'Product',
+  Pricing: 'Pricing',
+  PricingFee: 'PricingFee'
 };
 
 /**

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import { PrismaService } from 'libs/database-gateway/src';
 import { AuthenticationResolver } from './authentication.resolver';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from '../common/strategies/jwt.strategy';

@@ -3394,6 +3394,9 @@ export namespace Prisma {
     subdomain: string | null
     reference: string | null
     stripe_account_id: string | null
+    stripe_account_verified: boolean | null
+    stripe_account_disabled: boolean | null
+    stripe_account_disable_reason: string | null
   }
 
   export type WorkspaceMaxAggregateOutputType = {
@@ -3405,6 +3408,9 @@ export namespace Prisma {
     subdomain: string | null
     reference: string | null
     stripe_account_id: string | null
+    stripe_account_verified: boolean | null
+    stripe_account_disabled: boolean | null
+    stripe_account_disable_reason: string | null
   }
 
   export type WorkspaceCountAggregateOutputType = {
@@ -3415,7 +3421,11 @@ export namespace Prisma {
     updatedAt: number
     subdomain: number
     reference: number
+    services: number
     stripe_account_id: number
+    stripe_account_verified: number
+    stripe_account_disabled: number
+    stripe_account_disable_reason: number
     _all: number
   }
 
@@ -3429,6 +3439,9 @@ export namespace Prisma {
     subdomain?: true
     reference?: true
     stripe_account_id?: true
+    stripe_account_verified?: true
+    stripe_account_disabled?: true
+    stripe_account_disable_reason?: true
   }
 
   export type WorkspaceMaxAggregateInputType = {
@@ -3440,6 +3453,9 @@ export namespace Prisma {
     subdomain?: true
     reference?: true
     stripe_account_id?: true
+    stripe_account_verified?: true
+    stripe_account_disabled?: true
+    stripe_account_disable_reason?: true
   }
 
   export type WorkspaceCountAggregateInputType = {
@@ -3450,7 +3466,11 @@ export namespace Prisma {
     updatedAt?: true
     subdomain?: true
     reference?: true
+    services?: true
     stripe_account_id?: true
+    stripe_account_verified?: true
+    stripe_account_disabled?: true
+    stripe_account_disable_reason?: true
     _all?: true
   }
 
@@ -3534,7 +3554,11 @@ export namespace Prisma {
     updatedAt: Date
     subdomain: string
     reference: string
+    services: string[]
     stripe_account_id: string | null
+    stripe_account_verified: boolean
+    stripe_account_disabled: boolean
+    stripe_account_disable_reason: string | null
     _count: WorkspaceCountAggregateOutputType | null
     _min: WorkspaceMinAggregateOutputType | null
     _max: WorkspaceMaxAggregateOutputType | null
@@ -3562,7 +3586,11 @@ export namespace Prisma {
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    services?: boolean
     stripe_account_id?: boolean
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: boolean
     memberships?: boolean | Workspace$membershipsArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workspace"]>
@@ -3575,7 +3603,11 @@ export namespace Prisma {
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    services?: boolean
     stripe_account_id?: boolean
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: boolean
   }, ExtArgs["result"]["workspace"]>
 
   export type WorkspaceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3586,7 +3618,11 @@ export namespace Prisma {
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    services?: boolean
     stripe_account_id?: boolean
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: boolean
   }, ExtArgs["result"]["workspace"]>
 
   export type WorkspaceSelectScalar = {
@@ -3597,10 +3633,14 @@ export namespace Prisma {
     updatedAt?: boolean
     subdomain?: boolean
     reference?: boolean
+    services?: boolean
     stripe_account_id?: boolean
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: boolean
   }
 
-  export type WorkspaceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "subdomain" | "reference" | "stripe_account_id", ExtArgs["result"]["workspace"]>
+  export type WorkspaceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "subdomain" | "reference" | "services" | "stripe_account_id" | "stripe_account_verified" | "stripe_account_disabled" | "stripe_account_disable_reason", ExtArgs["result"]["workspace"]>
   export type WorkspaceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     memberships?: boolean | Workspace$membershipsArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
@@ -3621,7 +3661,11 @@ export namespace Prisma {
       updatedAt: Date
       subdomain: string
       reference: string
+      services: string[]
       stripe_account_id: string | null
+      stripe_account_verified: boolean
+      stripe_account_disabled: boolean
+      stripe_account_disable_reason: string | null
     }, ExtArgs["result"]["workspace"]>
     composites: {}
   }
@@ -4053,7 +4097,11 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Workspace", 'DateTime'>
     readonly subdomain: FieldRef<"Workspace", 'String'>
     readonly reference: FieldRef<"Workspace", 'String'>
+    readonly services: FieldRef<"Workspace", 'String[]'>
     readonly stripe_account_id: FieldRef<"Workspace", 'String'>
+    readonly stripe_account_verified: FieldRef<"Workspace", 'Boolean'>
+    readonly stripe_account_disabled: FieldRef<"Workspace", 'Boolean'>
+    readonly stripe_account_disable_reason: FieldRef<"Workspace", 'String'>
   }
     
 
@@ -4522,7 +4570,11 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     subdomain: 'subdomain',
     reference: 'reference',
-    stripe_account_id: 'stripe_account_id'
+    services: 'services',
+    stripe_account_id: 'stripe_account_id',
+    stripe_account_verified: 'stripe_account_verified',
+    stripe_account_disabled: 'stripe_account_disabled',
+    stripe_account_disable_reason: 'stripe_account_disable_reason'
   };
 
   export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
@@ -4805,7 +4857,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
     subdomain?: StringFilter<"Workspace"> | string
     reference?: StringFilter<"Workspace"> | string
+    services?: StringNullableListFilter<"Workspace">
     stripe_account_id?: StringNullableFilter<"Workspace"> | string | null
+    stripe_account_verified?: BoolFilter<"Workspace"> | boolean
+    stripe_account_disabled?: BoolFilter<"Workspace"> | boolean
+    stripe_account_disable_reason?: StringNullableFilter<"Workspace"> | string | null
     memberships?: MembershipListRelationFilter
   }
 
@@ -4817,7 +4873,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    services?: SortOrder
     stripe_account_id?: SortOrderInput | SortOrder
+    stripe_account_verified?: SortOrder
+    stripe_account_disabled?: SortOrder
+    stripe_account_disable_reason?: SortOrderInput | SortOrder
     memberships?: MembershipOrderByRelationAggregateInput
   }
 
@@ -4832,7 +4892,11 @@ export namespace Prisma {
     description?: StringFilter<"Workspace"> | string
     createdAt?: DateTimeFilter<"Workspace"> | Date | string
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
+    services?: StringNullableListFilter<"Workspace">
     stripe_account_id?: StringNullableFilter<"Workspace"> | string | null
+    stripe_account_verified?: BoolFilter<"Workspace"> | boolean
+    stripe_account_disabled?: BoolFilter<"Workspace"> | boolean
+    stripe_account_disable_reason?: StringNullableFilter<"Workspace"> | string | null
     memberships?: MembershipListRelationFilter
   }, "id" | "subdomain" | "reference">
 
@@ -4844,7 +4908,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    services?: SortOrder
     stripe_account_id?: SortOrderInput | SortOrder
+    stripe_account_verified?: SortOrder
+    stripe_account_disabled?: SortOrder
+    stripe_account_disable_reason?: SortOrderInput | SortOrder
     _count?: WorkspaceCountOrderByAggregateInput
     _max?: WorkspaceMaxOrderByAggregateInput
     _min?: WorkspaceMinOrderByAggregateInput
@@ -4861,7 +4929,11 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Workspace"> | Date | string
     subdomain?: StringWithAggregatesFilter<"Workspace"> | string
     reference?: StringWithAggregatesFilter<"Workspace"> | string
+    services?: StringNullableListFilter<"Workspace">
     stripe_account_id?: StringNullableWithAggregatesFilter<"Workspace"> | string | null
+    stripe_account_verified?: BoolWithAggregatesFilter<"Workspace"> | boolean
+    stripe_account_disabled?: BoolWithAggregatesFilter<"Workspace"> | boolean
+    stripe_account_disable_reason?: StringNullableWithAggregatesFilter<"Workspace"> | string | null
   }
 
   export type UserCreateInput = {
@@ -5028,7 +5100,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    services?: WorkspaceCreateservicesInput | string[]
     stripe_account_id?: string | null
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: string | null
     memberships?: MembershipCreateNestedManyWithoutWorkspaceInput
   }
 
@@ -5040,7 +5116,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    services?: WorkspaceCreateservicesInput | string[]
     stripe_account_id?: string | null
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: string | null
     memberships?: MembershipUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
@@ -5052,7 +5132,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    services?: WorkspaceUpdateservicesInput | string[]
     stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_account_verified?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disabled?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disable_reason?: NullableStringFieldUpdateOperationsInput | string | null
     memberships?: MembershipUpdateManyWithoutWorkspaceNestedInput
   }
 
@@ -5064,7 +5148,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    services?: WorkspaceUpdateservicesInput | string[]
     stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_account_verified?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disabled?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disable_reason?: NullableStringFieldUpdateOperationsInput | string | null
     memberships?: MembershipUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
@@ -5076,7 +5164,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    services?: WorkspaceCreateservicesInput | string[]
     stripe_account_id?: string | null
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: string | null
   }
 
   export type WorkspaceUpdateManyMutationInput = {
@@ -5087,7 +5179,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    services?: WorkspaceUpdateservicesInput | string[]
     stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_account_verified?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disabled?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disable_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkspaceUncheckedUpdateManyInput = {
@@ -5098,7 +5194,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    services?: WorkspaceUpdateservicesInput | string[]
     stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_account_verified?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disabled?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disable_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -5390,6 +5490,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type WorkspaceCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -5398,7 +5506,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
     subdomain?: SortOrder
     reference?: SortOrder
+    services?: SortOrder
     stripe_account_id?: SortOrder
+    stripe_account_verified?: SortOrder
+    stripe_account_disabled?: SortOrder
+    stripe_account_disable_reason?: SortOrder
   }
 
   export type WorkspaceMaxOrderByAggregateInput = {
@@ -5410,6 +5522,9 @@ export namespace Prisma {
     subdomain?: SortOrder
     reference?: SortOrder
     stripe_account_id?: SortOrder
+    stripe_account_verified?: SortOrder
+    stripe_account_disabled?: SortOrder
+    stripe_account_disable_reason?: SortOrder
   }
 
   export type WorkspaceMinOrderByAggregateInput = {
@@ -5421,6 +5536,9 @@ export namespace Prisma {
     subdomain?: SortOrder
     reference?: SortOrder
     stripe_account_id?: SortOrder
+    stripe_account_verified?: SortOrder
+    stripe_account_disabled?: SortOrder
+    stripe_account_disable_reason?: SortOrder
   }
 
   export type MembershipCreateNestedManyWithoutUserInput = {
@@ -5530,6 +5648,10 @@ export namespace Prisma {
     update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutMembershipsInput, WorkspaceUpdateWithoutMembershipsInput>, WorkspaceUncheckedUpdateWithoutMembershipsInput>
   }
 
+  export type WorkspaceCreateservicesInput = {
+    set: string[]
+  }
+
   export type MembershipCreateNestedManyWithoutWorkspaceInput = {
     create?: XOR<MembershipCreateWithoutWorkspaceInput, MembershipUncheckedCreateWithoutWorkspaceInput> | MembershipCreateWithoutWorkspaceInput[] | MembershipUncheckedCreateWithoutWorkspaceInput[]
     connectOrCreate?: MembershipCreateOrConnectWithoutWorkspaceInput | MembershipCreateOrConnectWithoutWorkspaceInput[]
@@ -5542,6 +5664,11 @@ export namespace Prisma {
     connectOrCreate?: MembershipCreateOrConnectWithoutWorkspaceInput | MembershipCreateOrConnectWithoutWorkspaceInput[]
     createMany?: MembershipCreateManyWorkspaceInputEnvelope
     connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+  }
+
+  export type WorkspaceUpdateservicesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type MembershipUpdateManyWithoutWorkspaceNestedInput = {
@@ -5871,7 +5998,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    services?: WorkspaceCreateservicesInput | string[]
     stripe_account_id?: string | null
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: string | null
   }
 
   export type WorkspaceUncheckedCreateWithoutMembershipsInput = {
@@ -5882,7 +6013,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     subdomain: string
     reference: string
+    services?: WorkspaceCreateservicesInput | string[]
     stripe_account_id?: string | null
+    stripe_account_verified?: boolean
+    stripe_account_disabled?: boolean
+    stripe_account_disable_reason?: string | null
   }
 
   export type WorkspaceCreateOrConnectWithoutMembershipsInput = {
@@ -5946,7 +6081,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    services?: WorkspaceUpdateservicesInput | string[]
     stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_account_verified?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disabled?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disable_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkspaceUncheckedUpdateWithoutMembershipsInput = {
@@ -5957,7 +6096,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subdomain?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
+    services?: WorkspaceUpdateservicesInput | string[]
     stripe_account_id?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_account_verified?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disabled?: BoolFieldUpdateOperationsInput | boolean
+    stripe_account_disable_reason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MembershipCreateWithoutWorkspaceInput = {

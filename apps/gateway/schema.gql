@@ -8,8 +8,12 @@ type WorkspaceGQLEntityType {
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  services: [String!]!
   subdomain: String!
   reference: String!
+  stripe_account_verified: Boolean!
+  stripe_account_disabled: Boolean!
+  stripe_account_disable_reason: String
   memberships: [MembershipGQLEntityType!]
 }
 
@@ -41,9 +45,60 @@ type UserGQLEntityType {
   memberships: [MembershipGQLEntityType!]
 }
 
+type StripeAccountResponseGQLEntityType {
+  created: Int!
+  expires_at: Int!
+  url: String!
+}
+
 type AuthenticationResponseGQLEntityType {
   access_token: String!
   user: UserGQLEntityType!
+}
+
+type PricingFeeGQLEntityType {
+  id: ID!
+  description: String!
+  total: Float!
+  name: String!
+}
+
+type CategoryGQLEntityType {
+  id: ID!
+  name: String!
+  description: String!
+  slug: String!
+  published: Boolean!
+  creator: UserGQLEntityType!
+  workspace: WorkspaceGQLEntityType!
+  products: [ProductGQLEntityType!]!
+}
+
+type ProductGQLEntityType {
+  id: ID!
+  name: String!
+  description: String!
+  published: Boolean!
+  pricings: [PricingGQLEntityType!]
+}
+
+type PricingGQLEntityType {
+  id: ID!
+  amount: Float!
+  chargeType: ChargeType!
+  packageType: PackageType!
+  product: ProductGQLEntityType
+  fees: [PricingFeeGQLEntityType!]
+}
+
+enum ChargeType {
+  ONE_TIME
+  RECURRING
+}
+
+enum PackageType {
+  FLAT
+  PACKAGE
 }
 
 type StoragePresignedURLGQLEntityType {
@@ -72,12 +127,18 @@ type SignedImageResponseGQLEntityType {
 type Query {
   me: UserGQLEntityType!
   findWorkspaces: [WorkspaceGQLEntityType!]!
+  categories: [CategoryGQLEntityType!]!
 }
 
 type Mutation {
   createUser(input: CreateUserGQLInput!): AuthenticationResponseGQLEntityType!
   loginUser(input: AuthenticationGQLInput!): AuthenticationResponseGQLEntityType!
   createWorkspace(input: CreateWorkspaceGQLInput!): WorkspaceGQLEntityType!
+  createAccountLink: StripeAccountResponseGQLEntityType!
+  createPricing(input: PricingCreateGQLInput!): PricingGQLEntityType!
+  createFee(input: PricingFeeCreateGQLInput!): PricingFeeGQLEntityType!
+  createProduct(input: ProductCreateGQLInput!): ProductGQLEntityType!
+  createCategory(input: CategoryCreateGQLInput!): CategoryGQLEntityType!
   initializeMultipartUpload(input: CreateFileGQLInput!): StorageInitializationResponseGQLEntityType!
   completeMultipartUpload(input: CompleteUploadGQLInput!): StorageCompleteResponseGQLEntityType!
   getSignedImage(input: SignedImageGQLInput!): SignedImageResponseGQLEntityType!
@@ -98,6 +159,35 @@ input AuthenticationGQLInput {
 input CreateWorkspaceGQLInput {
   name: String!
   description: String!
+  country: String!
+  services: [String!]!
+}
+
+input PricingCreateGQLInput {
+  amount: Float!
+  chargeType: ChargeType! = ONE_TIME
+  packageType: PackageType! = FLAT
+}
+
+input PricingFeeCreateGQLInput {
+  description: String!
+  total: Float! = 0
+  name: String!
+}
+
+input ProductCreateGQLInput {
+  name: String!
+  description: String!
+  productImage: String
+  productPricingId: String!
+  productPricingTaxId: String!
+  published: Boolean! = false
+}
+
+input CategoryCreateGQLInput {
+  name: String!
+  description: String!
+  published: Boolean! = false
 }
 
 input CreateFileGQLInput {

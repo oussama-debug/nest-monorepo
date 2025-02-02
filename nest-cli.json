@@ -5,10 +5,9 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/gateway/tsconfig.app.json"
+    "tsConfigPath": "tsconfig.json"
   },
   "monorepo": true,
-  "root": "apps/gateway",
   "projects": {
     "gateway": {
       "type": "application",
@@ -35,15 +34,6 @@
       "sourceRoot": "apps/payments/src",
       "compilerOptions": {
         "tsConfigPath": "apps/payments/tsconfig.app.json"
-      }
-    },
-    "workspace": {
-      "type": "application",
-      "root": "apps/workspace",
-      "entryFile": "main",
-      "sourceRoot": "apps/workspace/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/workspace/tsconfig.app.json"
       }
     },
     "database-gateway": {

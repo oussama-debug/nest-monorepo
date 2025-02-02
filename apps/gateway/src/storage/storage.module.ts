@@ -11,11 +11,13 @@ import { JwtService } from '@nestjs/jwt';
       useFactory: async (configService: ConfigService) => {
         return {
           s3: {
-            endpoint: configService.getOrThrow('AWS_ENDPOINT_URL_S3'),
-            secretAccessKey: configService.getOrThrow('AWS_SECRET_ACCESS_KEY'),
-            accessKeyId: configService.getOrThrow('AWS_ACCESS_KEY_ID'),
-            region: configService.getOrThrow('AWS_REGION'),
-            bucketName: configService.getOrThrow('BUCKET_NAME'),
+            endpoint: configService.getOrThrow('SECRET_AWS_ENDPOINT_URL_S3'),
+            secretAccessKey: configService.getOrThrow(
+              'SECRET_AWS_SECRET_ACCESS_KEY',
+            ),
+            accessKeyId: configService.getOrThrow('SECRET_AWS_ACCESS_KEY_ID'),
+            region: configService.getOrThrow('SECRET_AWS_REGION'),
+            bucketName: configService.getOrThrow('SECRET_AWS_BUCKET_NAME'),
           },
         };
       },
