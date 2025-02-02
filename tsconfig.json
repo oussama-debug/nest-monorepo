@@ -25,7 +25,8 @@
       "@app/common": ["libs/common/src"],
       "@app/common/*": ["libs/common/src/*"],
       "@app/storage": ["libs/storage/src"],
-      "@app/storage/*": ["libs/storage/src/*"]
+      "@app/storage/*": ["libs/storage/src/*"],
+      "@prisma/client": ["./node_modules/@prisma/client"]
     }
   }
 }
