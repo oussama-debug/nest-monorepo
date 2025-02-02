@@ -80,13 +80,17 @@ type ProductGQLEntityType {
   description: String!
   published: Boolean!
   pricings: [PricingGQLEntityType!]
+  creator: UserGQLEntityType!
+  workspace: WorkspaceGQLEntityType!
+  category: CategoryGQLEntityType!
 }
 
 type PricingGQLEntityType {
   id: ID!
   amount: Float!
-  chargeType: ChargeType!
-  packageType: PackageType!
+  charge_type: ChargeType!
+  package_type: PackageType!
+  currency: String!
   product: ProductGQLEntityType
   fees: [PricingFeeGQLEntityType!]
 }
@@ -127,6 +131,7 @@ type SignedImageResponseGQLEntityType {
 type Query {
   me: UserGQLEntityType!
   findWorkspaces: [WorkspaceGQLEntityType!]!
+  products: [ProductGQLEntityType!]!
   categories: [CategoryGQLEntityType!]!
 }
 
@@ -167,6 +172,7 @@ input PricingCreateGQLInput {
   amount: Float!
   chargeType: ChargeType! = ONE_TIME
   packageType: PackageType! = FLAT
+  currency: String!
 }
 
 input PricingFeeCreateGQLInput {
@@ -180,7 +186,7 @@ input ProductCreateGQLInput {
   description: String!
   productImage: String
   productPricingId: String!
-  productPricingTaxId: String!
+  productCategoryId: String!
   published: Boolean! = false
 }
 

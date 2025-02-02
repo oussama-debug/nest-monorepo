@@ -284,7 +284,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 6.2.1
-   * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
+   * Query Engine version: acc0b9dd43eb689cbd20c9470515d719db10d0b0
    */
   export type PrismaVersion = {
     client: string
@@ -2145,6 +2145,7 @@ export namespace Prisma {
      * Filter which Users to update
      */
     where?: UserWhereInput
+    limit?: number
   }
 
   /**
@@ -2167,6 +2168,7 @@ export namespace Prisma {
      * Filter which Users to update
      */
     where?: UserWhereInput
+    limit?: number
   }
 
   /**
@@ -2229,6 +2231,7 @@ export namespace Prisma {
      * Filter which Users to delete
      */
     where?: UserWhereInput
+    limit?: number
   }
 
   /**
@@ -3228,6 +3231,7 @@ export namespace Prisma {
      * Filter which Memberships to update
      */
     where?: MembershipWhereInput
+    limit?: number
   }
 
   /**
@@ -3250,6 +3254,7 @@ export namespace Prisma {
      * Filter which Memberships to update
      */
     where?: MembershipWhereInput
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -3316,6 +3321,7 @@ export namespace Prisma {
      * Filter which Memberships to delete
      */
     where?: MembershipWhereInput
+    limit?: number
   }
 
   /**
@@ -4391,6 +4397,7 @@ export namespace Prisma {
      * Filter which Workspaces to update
      */
     where?: WorkspaceWhereInput
+    limit?: number
   }
 
   /**
@@ -4413,6 +4420,7 @@ export namespace Prisma {
      * Filter which Workspaces to update
      */
     where?: WorkspaceWhereInput
+    limit?: number
   }
 
   /**
@@ -4475,6 +4483,7 @@ export namespace Prisma {
      * Filter which Workspaces to delete
      */
     where?: WorkspaceWhereInput
+    limit?: number
   }
 
   /**

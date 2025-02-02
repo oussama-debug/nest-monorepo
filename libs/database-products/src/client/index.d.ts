@@ -2406,7 +2406,9 @@ export namespace Prisma {
     createdAt: Date | null
     workspaceId: string | null
     userId: string | null
+    slug: string | null
     name: string | null
+    image: string | null
     description: string | null
     published: boolean | null
     categoryId: string | null
@@ -2417,7 +2419,9 @@ export namespace Prisma {
     createdAt: Date | null
     workspaceId: string | null
     userId: string | null
+    slug: string | null
     name: string | null
+    image: string | null
     description: string | null
     published: boolean | null
     categoryId: string | null
@@ -2428,7 +2432,9 @@ export namespace Prisma {
     createdAt: number
     workspaceId: number
     userId: number
+    slug: number
     name: number
+    image: number
     description: number
     published: number
     categoryId: number
@@ -2441,7 +2447,9 @@ export namespace Prisma {
     createdAt?: true
     workspaceId?: true
     userId?: true
+    slug?: true
     name?: true
+    image?: true
     description?: true
     published?: true
     categoryId?: true
@@ -2452,7 +2460,9 @@ export namespace Prisma {
     createdAt?: true
     workspaceId?: true
     userId?: true
+    slug?: true
     name?: true
+    image?: true
     description?: true
     published?: true
     categoryId?: true
@@ -2463,7 +2473,9 @@ export namespace Prisma {
     createdAt?: true
     workspaceId?: true
     userId?: true
+    slug?: true
     name?: true
+    image?: true
     description?: true
     published?: true
     categoryId?: true
@@ -2547,7 +2559,9 @@ export namespace Prisma {
     createdAt: Date
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published: boolean
     categoryId: string | null
@@ -2575,7 +2589,9 @@ export namespace Prisma {
     createdAt?: boolean
     workspaceId?: boolean
     userId?: boolean
+    slug?: boolean
     name?: boolean
+    image?: boolean
     description?: boolean
     published?: boolean
     categoryId?: boolean
@@ -2589,7 +2605,9 @@ export namespace Prisma {
     createdAt?: boolean
     workspaceId?: boolean
     userId?: boolean
+    slug?: boolean
     name?: boolean
+    image?: boolean
     description?: boolean
     published?: boolean
     categoryId?: boolean
@@ -2601,7 +2619,9 @@ export namespace Prisma {
     createdAt?: boolean
     workspaceId?: boolean
     userId?: boolean
+    slug?: boolean
     name?: boolean
+    image?: boolean
     description?: boolean
     published?: boolean
     categoryId?: boolean
@@ -2613,13 +2633,15 @@ export namespace Prisma {
     createdAt?: boolean
     workspaceId?: boolean
     userId?: boolean
+    slug?: boolean
     name?: boolean
+    image?: boolean
     description?: boolean
     published?: boolean
     categoryId?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "workspaceId" | "userId" | "name" | "description" | "published" | "categoryId", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "workspaceId" | "userId" | "slug" | "name" | "image" | "description" | "published" | "categoryId", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pricings?: boolean | Product$pricingsArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
@@ -2643,7 +2665,9 @@ export namespace Prisma {
       createdAt: Date
       workspaceId: string
       userId: string
+      slug: string
       name: string
+      image: string
       description: string
       published: boolean
       categoryId: string | null
@@ -3076,7 +3100,9 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly workspaceId: FieldRef<"Product", 'String'>
     readonly userId: FieldRef<"Product", 'String'>
+    readonly slug: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
+    readonly image: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
     readonly published: FieldRef<"Product", 'Boolean'>
     readonly categoryId: FieldRef<"Product", 'String'>
@@ -3534,38 +3560,30 @@ export namespace Prisma {
 
   export type AggregatePricing = {
     _count: PricingCountAggregateOutputType | null
-    _avg: PricingAvgAggregateOutputType | null
-    _sum: PricingSumAggregateOutputType | null
     _min: PricingMinAggregateOutputType | null
     _max: PricingMaxAggregateOutputType | null
   }
 
-  export type PricingAvgAggregateOutputType = {
-    amount: number | null
-  }
-
-  export type PricingSumAggregateOutputType = {
-    amount: bigint | null
-  }
-
   export type PricingMinAggregateOutputType = {
     id: string | null
-    amount: bigint | null
+    amount: string | null
     charge_type: $Enums.chargeType | null
     package_type: $Enums.packageType | null
     workspaceId: string | null
     userId: string | null
+    currency: string | null
     createdAt: Date | null
     productId: string | null
   }
 
   export type PricingMaxAggregateOutputType = {
     id: string | null
-    amount: bigint | null
+    amount: string | null
     charge_type: $Enums.chargeType | null
     package_type: $Enums.packageType | null
     workspaceId: string | null
     userId: string | null
+    currency: string | null
     createdAt: Date | null
     productId: string | null
   }
@@ -3577,19 +3595,12 @@ export namespace Prisma {
     package_type: number
     workspaceId: number
     userId: number
+    currency: number
     createdAt: number
     productId: number
     _all: number
   }
 
-
-  export type PricingAvgAggregateInputType = {
-    amount?: true
-  }
-
-  export type PricingSumAggregateInputType = {
-    amount?: true
-  }
 
   export type PricingMinAggregateInputType = {
     id?: true
@@ -3598,6 +3609,7 @@ export namespace Prisma {
     package_type?: true
     workspaceId?: true
     userId?: true
+    currency?: true
     createdAt?: true
     productId?: true
   }
@@ -3609,6 +3621,7 @@ export namespace Prisma {
     package_type?: true
     workspaceId?: true
     userId?: true
+    currency?: true
     createdAt?: true
     productId?: true
   }
@@ -3620,6 +3633,7 @@ export namespace Prisma {
     package_type?: true
     workspaceId?: true
     userId?: true
+    currency?: true
     createdAt?: true
     productId?: true
     _all?: true
@@ -3663,18 +3677,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: PricingAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PricingSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: PricingMinAggregateInputType
@@ -3705,24 +3707,21 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PricingCountAggregateInputType | true
-    _avg?: PricingAvgAggregateInputType
-    _sum?: PricingSumAggregateInputType
     _min?: PricingMinAggregateInputType
     _max?: PricingMaxAggregateInputType
   }
 
   export type PricingGroupByOutputType = {
     id: string
-    amount: bigint
+    amount: string
     charge_type: $Enums.chargeType
     package_type: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt: Date
     productId: string | null
     _count: PricingCountAggregateOutputType | null
-    _avg: PricingAvgAggregateOutputType | null
-    _sum: PricingSumAggregateOutputType | null
     _min: PricingMinAggregateOutputType | null
     _max: PricingMaxAggregateOutputType | null
   }
@@ -3748,6 +3747,7 @@ export namespace Prisma {
     package_type?: boolean
     workspaceId?: boolean
     userId?: boolean
+    currency?: boolean
     createdAt?: boolean
     productId?: boolean
     product?: boolean | Pricing$productArgs<ExtArgs>
@@ -3762,6 +3762,7 @@ export namespace Prisma {
     package_type?: boolean
     workspaceId?: boolean
     userId?: boolean
+    currency?: boolean
     createdAt?: boolean
     productId?: boolean
     product?: boolean | Pricing$productArgs<ExtArgs>
@@ -3774,6 +3775,7 @@ export namespace Prisma {
     package_type?: boolean
     workspaceId?: boolean
     userId?: boolean
+    currency?: boolean
     createdAt?: boolean
     productId?: boolean
     product?: boolean | Pricing$productArgs<ExtArgs>
@@ -3786,11 +3788,12 @@ export namespace Prisma {
     package_type?: boolean
     workspaceId?: boolean
     userId?: boolean
+    currency?: boolean
     createdAt?: boolean
     productId?: boolean
   }
 
-  export type PricingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "charge_type" | "package_type" | "workspaceId" | "userId" | "createdAt" | "productId", ExtArgs["result"]["pricing"]>
+  export type PricingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "charge_type" | "package_type" | "workspaceId" | "userId" | "currency" | "createdAt" | "productId", ExtArgs["result"]["pricing"]>
   export type PricingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | Pricing$productArgs<ExtArgs>
     fees?: boolean | Pricing$feesArgs<ExtArgs>
@@ -3811,11 +3814,12 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      amount: bigint
+      amount: string
       charge_type: $Enums.chargeType
       package_type: $Enums.packageType
       workspaceId: string
       userId: string
+      currency: string
       createdAt: Date
       productId: string | null
     }, ExtArgs["result"]["pricing"]>
@@ -4244,11 +4248,12 @@ export namespace Prisma {
    */ 
   interface PricingFieldRefs {
     readonly id: FieldRef<"Pricing", 'String'>
-    readonly amount: FieldRef<"Pricing", 'BigInt'>
+    readonly amount: FieldRef<"Pricing", 'String'>
     readonly charge_type: FieldRef<"Pricing", 'chargeType'>
     readonly package_type: FieldRef<"Pricing", 'packageType'>
     readonly workspaceId: FieldRef<"Pricing", 'String'>
     readonly userId: FieldRef<"Pricing", 'String'>
+    readonly currency: FieldRef<"Pricing", 'String'>
     readonly createdAt: FieldRef<"Pricing", 'DateTime'>
     readonly productId: FieldRef<"Pricing", 'String'>
   }
@@ -5827,7 +5832,9 @@ export namespace Prisma {
     createdAt: 'createdAt',
     workspaceId: 'workspaceId',
     userId: 'userId',
+    slug: 'slug',
     name: 'name',
+    image: 'image',
     description: 'description',
     published: 'published',
     categoryId: 'categoryId'
@@ -5843,6 +5850,7 @@ export namespace Prisma {
     package_type: 'package_type',
     workspaceId: 'workspaceId',
     userId: 'userId',
+    currency: 'currency',
     createdAt: 'createdAt',
     productId: 'productId'
   };
@@ -5926,20 +5934,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BigInt'
-   */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
-    
-
-
-  /**
-   * Reference to a field of type 'BigInt[]'
-   */
-  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
-    
-
-
-  /**
    * Reference to a field of type 'chargeType'
    */
   export type EnumchargeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chargeType'>
@@ -5992,20 +5986,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -6090,7 +6070,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     workspaceId?: UuidFilter<"Product"> | string
     userId?: UuidFilter<"Product"> | string
+    slug?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
+    image?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     published?: BoolFilter<"Product"> | boolean
     categoryId?: UuidNullableFilter<"Product"> | string | null
@@ -6103,7 +6085,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    slug?: SortOrder
     name?: SortOrder
+    image?: SortOrder
     description?: SortOrder
     published?: SortOrder
     categoryId?: SortOrderInput | SortOrder
@@ -6113,6 +6097,7 @@ export namespace Prisma {
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    slug?: string
     AND?: ProductWhereInput | ProductWhereInput[]
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
@@ -6120,19 +6105,22 @@ export namespace Prisma {
     workspaceId?: UuidFilter<"Product"> | string
     userId?: UuidFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
+    image?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     published?: BoolFilter<"Product"> | boolean
     categoryId?: UuidNullableFilter<"Product"> | string | null
     pricings?: PricingListRelationFilter
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-  }, "id">
+  }, "id" | "slug">
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    slug?: SortOrder
     name?: SortOrder
+    image?: SortOrder
     description?: SortOrder
     published?: SortOrder
     categoryId?: SortOrderInput | SortOrder
@@ -6149,7 +6137,9 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     workspaceId?: UuidWithAggregatesFilter<"Product"> | string
     userId?: UuidWithAggregatesFilter<"Product"> | string
+    slug?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
+    image?: StringWithAggregatesFilter<"Product"> | string
     description?: StringWithAggregatesFilter<"Product"> | string
     published?: BoolWithAggregatesFilter<"Product"> | boolean
     categoryId?: UuidNullableWithAggregatesFilter<"Product"> | string | null
@@ -6160,11 +6150,12 @@ export namespace Prisma {
     OR?: PricingWhereInput[]
     NOT?: PricingWhereInput | PricingWhereInput[]
     id?: UuidFilter<"Pricing"> | string
-    amount?: BigIntFilter<"Pricing"> | bigint | number
+    amount?: StringFilter<"Pricing"> | string
     charge_type?: EnumchargeTypeFilter<"Pricing"> | $Enums.chargeType
     package_type?: EnumpackageTypeFilter<"Pricing"> | $Enums.packageType
     workspaceId?: UuidFilter<"Pricing"> | string
     userId?: UuidFilter<"Pricing"> | string
+    currency?: StringFilter<"Pricing"> | string
     createdAt?: DateTimeFilter<"Pricing"> | Date | string
     productId?: UuidNullableFilter<"Pricing"> | string | null
     product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
@@ -6178,6 +6169,7 @@ export namespace Prisma {
     package_type?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    currency?: SortOrder
     createdAt?: SortOrder
     productId?: SortOrderInput | SortOrder
     product?: ProductOrderByWithRelationInput
@@ -6189,11 +6181,12 @@ export namespace Prisma {
     AND?: PricingWhereInput | PricingWhereInput[]
     OR?: PricingWhereInput[]
     NOT?: PricingWhereInput | PricingWhereInput[]
-    amount?: BigIntFilter<"Pricing"> | bigint | number
+    amount?: StringFilter<"Pricing"> | string
     charge_type?: EnumchargeTypeFilter<"Pricing"> | $Enums.chargeType
     package_type?: EnumpackageTypeFilter<"Pricing"> | $Enums.packageType
     workspaceId?: UuidFilter<"Pricing"> | string
     userId?: UuidFilter<"Pricing"> | string
+    currency?: StringFilter<"Pricing"> | string
     createdAt?: DateTimeFilter<"Pricing"> | Date | string
     productId?: UuidNullableFilter<"Pricing"> | string | null
     product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
@@ -6207,13 +6200,12 @@ export namespace Prisma {
     package_type?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    currency?: SortOrder
     createdAt?: SortOrder
     productId?: SortOrderInput | SortOrder
     _count?: PricingCountOrderByAggregateInput
-    _avg?: PricingAvgOrderByAggregateInput
     _max?: PricingMaxOrderByAggregateInput
     _min?: PricingMinOrderByAggregateInput
-    _sum?: PricingSumOrderByAggregateInput
   }
 
   export type PricingScalarWhereWithAggregatesInput = {
@@ -6221,11 +6213,12 @@ export namespace Prisma {
     OR?: PricingScalarWhereWithAggregatesInput[]
     NOT?: PricingScalarWhereWithAggregatesInput | PricingScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Pricing"> | string
-    amount?: BigIntWithAggregatesFilter<"Pricing"> | bigint | number
+    amount?: StringWithAggregatesFilter<"Pricing"> | string
     charge_type?: EnumchargeTypeWithAggregatesFilter<"Pricing"> | $Enums.chargeType
     package_type?: EnumpackageTypeWithAggregatesFilter<"Pricing"> | $Enums.packageType
     workspaceId?: UuidWithAggregatesFilter<"Pricing"> | string
     userId?: UuidWithAggregatesFilter<"Pricing"> | string
+    currency?: StringWithAggregatesFilter<"Pricing"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Pricing"> | Date | string
     productId?: UuidNullableWithAggregatesFilter<"Pricing"> | string | null
   }
@@ -6373,7 +6366,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     pricings?: PricingCreateNestedManyWithoutProductInput
@@ -6385,7 +6380,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     categoryId?: string | null
@@ -6397,7 +6394,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     pricings?: PricingUpdateManyWithoutProductNestedInput
@@ -6409,7 +6408,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6421,7 +6422,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     categoryId?: string | null
@@ -6432,7 +6435,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -6442,7 +6447,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6450,11 +6457,12 @@ export namespace Prisma {
 
   export type PricingCreateInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     product?: ProductCreateNestedOneWithoutPricingsInput
     fees?: PricingFeeCreateNestedManyWithoutPricingsInput
@@ -6462,11 +6470,12 @@ export namespace Prisma {
 
   export type PricingUncheckedCreateInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     productId?: string | null
     fees?: PricingFeeUncheckedCreateNestedManyWithoutPricingsInput
@@ -6474,11 +6483,12 @@ export namespace Prisma {
 
   export type PricingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneWithoutPricingsNestedInput
     fees?: PricingFeeUpdateManyWithoutPricingsNestedInput
@@ -6486,11 +6496,12 @@ export namespace Prisma {
 
   export type PricingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableStringFieldUpdateOperationsInput | string | null
     fees?: PricingFeeUncheckedUpdateManyWithoutPricingsNestedInput
@@ -6498,32 +6509,35 @@ export namespace Prisma {
 
   export type PricingCreateManyInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     productId?: string | null
   }
 
   export type PricingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PricingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -6766,7 +6780,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    slug?: SortOrder
     name?: SortOrder
+    image?: SortOrder
     description?: SortOrder
     published?: SortOrder
     categoryId?: SortOrder
@@ -6777,7 +6793,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    slug?: SortOrder
     name?: SortOrder
+    image?: SortOrder
     description?: SortOrder
     published?: SortOrder
     categoryId?: SortOrder
@@ -6788,7 +6806,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    slug?: SortOrder
     name?: SortOrder
+    image?: SortOrder
     description?: SortOrder
     published?: SortOrder
     categoryId?: SortOrder
@@ -6807,17 +6827,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type BigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
   export type EnumchargeTypeFilter<$PrismaModel = never> = {
@@ -6856,12 +6865,9 @@ export namespace Prisma {
     package_type?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    currency?: SortOrder
     createdAt?: SortOrder
     productId?: SortOrder
-  }
-
-  export type PricingAvgOrderByAggregateInput = {
-    amount?: SortOrder
   }
 
   export type PricingMaxOrderByAggregateInput = {
@@ -6871,6 +6877,7 @@ export namespace Prisma {
     package_type?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    currency?: SortOrder
     createdAt?: SortOrder
     productId?: SortOrder
   }
@@ -6882,28 +6889,9 @@ export namespace Prisma {
     package_type?: SortOrder
     workspaceId?: SortOrder
     userId?: SortOrder
+    currency?: SortOrder
     createdAt?: SortOrder
     productId?: SortOrder
-  }
-
-  export type PricingSumOrderByAggregateInput = {
-    amount?: SortOrder
-  }
-
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type EnumchargeTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7152,14 +7140,6 @@ export namespace Prisma {
     connect?: PricingFeeWhereUniqueInput | PricingFeeWhereUniqueInput[]
   }
 
-  export type BigIntFieldUpdateOperationsInput = {
-    set?: bigint | number
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
-  }
-
   export type EnumchargeTypeFieldUpdateOperationsInput = {
     set?: $Enums.chargeType
   }
@@ -7405,17 +7385,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
-  }
-
   export type NestedEnumchargeTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.chargeType | EnumchargeTypeFieldRefInput<$PrismaModel>
     in?: $Enums.chargeType[] | ListEnumchargeTypeFieldRefInput<$PrismaModel>
@@ -7428,33 +7397,6 @@ export namespace Prisma {
     in?: $Enums.packageType[] | ListEnumpackageTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.packageType[] | ListEnumpackageTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumpackageTypeFilter<$PrismaModel> | $Enums.packageType
-  }
-
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedEnumchargeTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7526,7 +7468,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     pricings?: PricingCreateNestedManyWithoutProductInput
@@ -7537,7 +7481,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     pricings?: PricingUncheckedCreateNestedManyWithoutProductInput
@@ -7577,7 +7523,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     workspaceId?: UuidFilter<"Product"> | string
     userId?: UuidFilter<"Product"> | string
+    slug?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
+    image?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     published?: BoolFilter<"Product"> | boolean
     categoryId?: UuidNullableFilter<"Product"> | string | null
@@ -7585,22 +7533,24 @@ export namespace Prisma {
 
   export type PricingCreateWithoutProductInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     fees?: PricingFeeCreateNestedManyWithoutPricingsInput
   }
 
   export type PricingUncheckedCreateWithoutProductInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     fees?: PricingFeeUncheckedCreateNestedManyWithoutPricingsInput
   }
@@ -7663,11 +7613,12 @@ export namespace Prisma {
     OR?: PricingScalarWhereInput[]
     NOT?: PricingScalarWhereInput | PricingScalarWhereInput[]
     id?: UuidFilter<"Pricing"> | string
-    amount?: BigIntFilter<"Pricing"> | bigint | number
+    amount?: StringFilter<"Pricing"> | string
     charge_type?: EnumchargeTypeFilter<"Pricing"> | $Enums.chargeType
     package_type?: EnumpackageTypeFilter<"Pricing"> | $Enums.packageType
     workspaceId?: UuidFilter<"Pricing"> | string
     userId?: UuidFilter<"Pricing"> | string
+    currency?: StringFilter<"Pricing"> | string
     createdAt?: DateTimeFilter<"Pricing"> | Date | string
     productId?: UuidNullableFilter<"Pricing"> | string | null
   }
@@ -7710,7 +7661,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     category?: CategoryCreateNestedOneWithoutProductsInput
@@ -7721,7 +7674,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
     categoryId?: string | null
@@ -7769,7 +7724,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     category?: CategoryUpdateOneWithoutProductsNestedInput
@@ -7780,7 +7737,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7815,22 +7774,24 @@ export namespace Prisma {
 
   export type PricingCreateWithoutFeesInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     product?: ProductCreateNestedOneWithoutPricingsInput
   }
 
   export type PricingUncheckedCreateWithoutFeesInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
     productId?: string | null
   }
@@ -7861,7 +7822,9 @@ export namespace Prisma {
     createdAt?: Date | string
     workspaceId: string
     userId: string
+    slug: string
     name: string
+    image: string
     description: string
     published?: boolean
   }
@@ -7871,7 +7834,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     pricings?: PricingUpdateManyWithoutProductNestedInput
@@ -7882,7 +7847,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     pricings?: PricingUncheckedUpdateManyWithoutProductNestedInput
@@ -7893,50 +7860,56 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PricingCreateManyProductInput = {
     id?: string
-    amount?: bigint | number
+    amount: string
     charge_type?: $Enums.chargeType
     package_type?: $Enums.packageType
     workspaceId: string
     userId: string
+    currency: string
     createdAt?: Date | string
   }
 
   export type PricingUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fees?: PricingFeeUpdateManyWithoutPricingsNestedInput
   }
 
   export type PricingUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fees?: PricingFeeUncheckedUpdateManyWithoutPricingsNestedInput
   }
 
   export type PricingUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7966,33 +7939,36 @@ export namespace Prisma {
 
   export type PricingUpdateWithoutFeesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneWithoutPricingsNestedInput
   }
 
   export type PricingUncheckedUpdateWithoutFeesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PricingUncheckedUpdateManyWithoutFeesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: StringFieldUpdateOperationsInput | string
     charge_type?: EnumchargeTypeFieldUpdateOperationsInput | $Enums.chargeType
     package_type?: EnumpackageTypeFieldUpdateOperationsInput | $Enums.packageType
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableStringFieldUpdateOperationsInput | string | null
   }

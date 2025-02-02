@@ -15,7 +15,7 @@ export class ProductCreateGQLInput {
   productPricingId: string;
 
   @Field()
-  productPricingTaxId: string;
+  productCategoryId: string;
 
   @Field({ defaultValue: false })
   published?: boolean;

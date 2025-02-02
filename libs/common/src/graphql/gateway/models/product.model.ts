@@ -9,13 +9,13 @@ import { UserGQLEntityType } from '@app/common/graphql/gateway/models/user.model
 import { WorkspaceGQLEntityType } from '@app/common/graphql/gateway/models/workspace.model';
 
 export enum ChargeType {
-  ONE_TIME = 'ONE_TIME',
-  RECURRING = 'RECURRING',
+  ONE_TIME = 'one_time',
+  RECURRING = 'recurring',
 }
 
 export enum PackageType {
-  FLAT = 'FLAT',
-  PACKAGE = 'PACKAGE',
+  FLAT = 'flat',
+  PACKAGE = 'package',
 }
 
 registerEnumType(ChargeType, { name: 'ChargeType' });
@@ -79,6 +79,15 @@ export class ProductGQLEntityType {
 
   @Field(() => [PricingGQLEntityType], { nullable: true })
   pricings?: PricingGQLEntityType[];
+
+  @Field(() => UserGQLEntityType)
+  creator: UserGQLEntityType;
+
+  @Field(() => WorkspaceGQLEntityType)
+  workspace: WorkspaceGQLEntityType;
+
+  @Field(() => CategoryGQLEntityType)
+  category: CategoryGQLEntityType;
 }
 
 @ObjectType()
@@ -90,10 +99,13 @@ export class PricingGQLEntityType {
   amount: number;
 
   @Field(() => ChargeType)
-  chargeType: ChargeType;
+  charge_type: ChargeType;
 
   @Field(() => PackageType)
-  packageType: PackageType;
+  package_type: PackageType;
+
+  @Field(() => String)
+  currency: string;
 
   @Field(() => ProductGQLEntityType, { nullable: true })
   product?: ProductGQLEntityType;

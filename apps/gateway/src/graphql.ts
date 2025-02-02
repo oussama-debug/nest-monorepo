@@ -40,6 +40,7 @@ export class PricingCreateGQLInput {
     amount: number;
     chargeType: ChargeType;
     packageType: PackageType;
+    currency: string;
 }
 
 export class PricingFeeCreateGQLInput {
@@ -53,7 +54,7 @@ export class ProductCreateGQLInput {
     description: string;
     productImage?: Nullable<string>;
     productPricingId: string;
-    productPricingTaxId: string;
+    productCategoryId: string;
     published: boolean;
 }
 
@@ -164,13 +165,17 @@ export class ProductGQLEntityType {
     description: string;
     published: boolean;
     pricings?: Nullable<PricingGQLEntityType[]>;
+    creator: UserGQLEntityType;
+    workspace: WorkspaceGQLEntityType;
+    category: CategoryGQLEntityType;
 }
 
 export class PricingGQLEntityType {
     id: string;
     amount: number;
-    chargeType: ChargeType;
-    packageType: PackageType;
+    charge_type: ChargeType;
+    package_type: PackageType;
+    currency: string;
     product?: Nullable<ProductGQLEntityType>;
     fees?: Nullable<PricingFeeGQLEntityType[]>;
 }
@@ -202,6 +207,8 @@ export abstract class IQuery {
     abstract me(): UserGQLEntityType | Promise<UserGQLEntityType>;
 
     abstract findWorkspaces(): WorkspaceGQLEntityType[] | Promise<WorkspaceGQLEntityType[]>;
+
+    abstract products(): ProductGQLEntityType[] | Promise<ProductGQLEntityType[]>;
 
     abstract categories(): CategoryGQLEntityType[] | Promise<CategoryGQLEntityType[]>;
 }
