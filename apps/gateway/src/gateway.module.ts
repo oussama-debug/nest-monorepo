@@ -28,7 +28,7 @@ import { WebhookService } from './webhook.service';
             outputAs: 'class',
           },
           cors: {
-            origin: 'http://localhost:3000',
+            origin: process.env.PUBLIC_ENDPOINT,
             credentials: true,
           },
           autoSchemaFile: join(process.cwd(), 'apps/gateway/schema.gql'),
