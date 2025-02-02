@@ -49,13 +49,9 @@ import { WebhookService } from './webhook.service';
           useFactory: async (configService: ConfigService) => ({
             transport: Transport.REDIS,
             options: {
-              host: configService.getOrThrow('GATEWAY_BUS_URL') as string,
-              port: parseInt(
-                configService.getOrThrow('GATEWAY_BUS_PORT') as string,
-              ),
-              /*...(configService.getOrThrow('NODE_ENV') === 'production' && {
-                password: configService.getOrThrow('GATEWAY_BUS_PASSWORD'),
-              }),*/
+              url: configService.getOrThrow('GATEWAY_BUS_URL') as string,
+              retryAttempts: 5,
+              retryDelay: 1000,
             },
           }),
         },
