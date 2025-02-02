@@ -30,7 +30,17 @@ export class ProductResolver {
     @Args('input') input: PricingCreateGQLInput,
     @UseUser() user,
   ) {
-    return await this.productService.createPricing(input);
+    const workspace = await this.customerService.findWorkspacesByOwner(user.id);
+
+    if (!workspace || workspace.length <= 0)
+      throw new InvalidWorkspaceGQLError('Workspace not created yet');
+
+    const r = await this.productService.createPricing({
+      ...input,
+      user_id: user.id,
+      workspace_id: workspace[0].id,
+    });
+    return r;
   }
 
   @Mutation(() => PricingFeeGQLEntityType)
@@ -48,7 +58,16 @@ export class ProductResolver {
     @Args('input') input: ProductCreateGQLInput,
     @UseUser() user,
   ) {
-    return await this.productService.createProduct(input);
+    const workspace = await this.customerService.findWorkspacesByOwner(user.id);
+
+    if (!workspace || workspace.length <= 0)
+      throw new InvalidWorkspaceGQLError('Workspace not created yet');
+
+    return await this.productService.createProduct({
+      ...input,
+      workspace_id: workspace[0].id,
+      user_id: user.id,
+    });
   }
 
   @Mutation(() => CategoryGQLEntityType)
@@ -84,6 +103,63 @@ export class ProductResolver {
     };
   }
 
+  @Query(() => [ProductGQLEntityType])
+  @UseGuards(JwtAuthenticationGuard)
+  async products(@UseUser() user) {
+    const workspace = await this.customerService.findWorkspacesByOwner(user.id);
+
+    if (!workspace || workspace.length <= 0) {
+      throw new InvalidWorkspaceGQLError('Workspace not created yet');
+    }
+
+    const products = await this.productService.products({
+      workspace_id: workspace[0].id,
+    });
+
+    if (products.length === 0) return [];
+
+    const [userIds, workspaceIds] = products
+      .reduce(
+        (acc, product) => {
+          acc[0].add(product.userId);
+          acc[1].add(product.workspaceId);
+          return acc;
+        },
+        [new Set<string>(), new Set<string>()],
+      )
+      .map((set) => Array.from(set));
+
+    // get users and workspaces
+    const [users, workspaces] = await Promise.all([
+      this.customerService.findCustomers(userIds as string[]),
+      this.customerService.findWorkspaces(workspaceIds as string[]),
+    ]);
+
+    // Create maps for efficient lookups
+    const userMap: Map<string, User> = new Map(
+      users.map((user) => [user.id, user]),
+    );
+    const workspaceMap: Map<string, Workspace> = new Map(
+      workspaces.map((ws) => [ws.id, ws]),
+    );
+
+    // Map products with users and workspaces
+    const productsWithUsersAndWorkspaces = products.map((product) => {
+      const user = userMap.get(product.userId);
+      const workspace = workspaceMap.get(product.workspaceId);
+
+      const { userId, workspaceId, ...productsWithoutRefs } = product;
+
+      return {
+        ...productsWithoutRefs,
+        creator: user || null,
+        workspace: workspace || null,
+      };
+    });
+
+    return productsWithUsersAndWorkspaces;
+  }
+
   @Query(() => [CategoryGQLEntityType])
   @UseGuards(JwtAuthenticationGuard)
   async categories(@UseUser() user) {
@@ -97,17 +173,19 @@ export class ProductResolver {
       workspace_id: workspace[0].id,
     });
 
-    if (categories.length === 0) {
-      return [];
-    }
+    if (categories.length === 0) return [];
 
     // get userIds and workspaceIds
-    const userIds: string[] = Array.from(
-      new Set(categories.map((c) => c.userId)),
-    );
-    const workspaceIds: string[] = Array.from(
-      new Set(categories.map((c) => c.workspaceId)),
-    );
+    const [userIds, workspaceIds] = categories
+      .reduce(
+        (acc, category) => {
+          acc[0].add(category.userId);
+          acc[1].add(category.workspaceId);
+          return acc;
+        },
+        [new Set<string>(), new Set<string>()],
+      )
+      .map((set) => Array.from(set));
 
     // get users and workspaces
     const [users, workspaces] = await Promise.all([

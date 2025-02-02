@@ -11,4 +11,7 @@ export class PricingCreateGQLInput {
 
   @Field(() => PackageType, { defaultValue: PackageType.FLAT })
   packageType?: PackageType;
+
+  @Field(() => String)
+  currency: string;
 }

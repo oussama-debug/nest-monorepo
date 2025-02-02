@@ -73,6 +73,15 @@ services:
       timeout: 3s
       retries: 5
 
+  typesense:
+    image: typesense/typesense:27.1
+    restart: on-failure
+    ports:
+      - "8108:8108"
+    volumes:
+      - typesense-data:/data
+    command: '--data-dir /data --api-key=xyz --enable-cors'
+
 networks:
   microservices-network:
     driver: bridge
@@ -82,3 +91,4 @@ volumes:
   postgres_data:
   timescaledb_data:
   minio_data:
+  typesense-data:

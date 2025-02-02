@@ -16,8 +16,14 @@ export class ProductCreateInput {
   productImage?: string;
 
   @IsString()
+  productCategoryId: string;
+
+  @IsString()
   productPricingId: string;
 
   @IsString()
-  productPricingTaxId: string;
+  workspace_id: string;
+
+  @IsString()
+  user_id: string;
 }

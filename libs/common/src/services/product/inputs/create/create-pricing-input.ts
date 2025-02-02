@@ -2,7 +2,7 @@ import {
   ChargeType,
   PackageType,
 } from '@app/common/graphql/gateway/models/product.model';
-import { IsNumber, IsOptional } from 'class-validator';
+import { IsNumber, IsString, IsOptional } from 'class-validator';
 
 export class PricingCreateInput {
   @IsNumber()
@@ -13,4 +13,13 @@ export class PricingCreateInput {
 
   @IsOptional()
   packageType?: PackageType;
+
+  @IsString()
+  user_id: string;
+
+  @IsString()
+  workspace_id: string;
+
+  @IsString()
+  currency: string;
 }

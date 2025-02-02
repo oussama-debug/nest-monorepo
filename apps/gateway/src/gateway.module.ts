@@ -53,6 +53,9 @@ import { WebhookService } from './webhook.service';
               port: parseInt(
                 configService.getOrThrow('GATEWAY_BUS_PORT') as string,
               ),
+              ...(configService.getOrThrow('NODE_ENV') === 'production' && {
+                password: configService.getOrThrow('GATEWAY_BUS_PASSWORD'),
+              }),
             },
           }),
         },

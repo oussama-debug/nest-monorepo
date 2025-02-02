@@ -133,7 +133,9 @@ exports.Prisma.ProductScalarFieldEnum = {
   createdAt: 'createdAt',
   workspaceId: 'workspaceId',
   userId: 'userId',
+  slug: 'slug',
   name: 'name',
+  image: 'image',
   description: 'description',
   published: 'published',
   categoryId: 'categoryId'
@@ -146,6 +148,7 @@ exports.Prisma.PricingScalarFieldEnum = {
   package_type: 'package_type',
   workspaceId: 'workspaceId',
   userId: 'userId',
+  currency: 'currency',
   createdAt: 'createdAt',
   productId: 'productId'
 };
