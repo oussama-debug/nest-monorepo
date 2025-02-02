@@ -21,8 +21,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/marketplace-services/test/jest-e2e.json",
-    "gateway:deploy": "cd libs/database-gateway && pnpm dlx prisma db push && pnpm dlx prisma generate",
-    "products:deploy": "cd libs/database-products && pnpm dlx prisma db push && pnpm dlx prisma generate"
+    "gateway:deploy": "cd libs/database-gateway && pnpm dlx prisma db push",
+    "products:deploy": "cd libs/database-products && pnpm dlx prisma db push"
   },
   "dependencies": {
     "@apollo/server": "^4.11.3",
