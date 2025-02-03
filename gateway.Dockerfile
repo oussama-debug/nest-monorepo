@@ -27,7 +27,6 @@ ENV NODE_ENV=${NODE_ENV}
 
 # Install dependencies and generate Prisma client
 RUN pnpm install --frozen-lockfile
-RUN cd libs/database && DATABASE_URL=${DATABASE_URL} pnpm dlx prisma generate
 RUN pnpm build
 
 # production stage
@@ -60,7 +59,7 @@ COPY --from=builder /app/pnpm-lock.yaml ./
 COPY --from=builder /app/libs/database/prisma ./libs/database/prisma
 
 # Generate Prisma client with proper DATABASE_URL
-RUN DATABASE_URL=${DATABASE_URL} npx prisma generate
+RUN cd libs/database && pnpm dlx prisma generate
 
 # Set all environment variables
 ENV DATABASE_URL=${DATABASE_URL} \
