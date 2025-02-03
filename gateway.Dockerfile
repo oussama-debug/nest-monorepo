@@ -14,7 +14,7 @@ RUN npm install -g @nestjs/cli
 WORKDIR /app
 
 # Copy configuration files
-COPY pnpm-lock.yaml package.json nest-cli.json tsconfig*.json ./
+COPY package.json nest-cli.json tsconfig*.json ./
 COPY apps ./apps
 COPY libs ./libs
 
