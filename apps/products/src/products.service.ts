@@ -2,7 +2,7 @@ import { CategoryCreateInput } from '@app/common/services/product/inputs/create/
 import { PricingCreateInput } from '@app/common/services/product/inputs/create/create-pricing-input';
 import { ProductCreateInput } from '@app/common/services/product/inputs/create/create-product-input';
 import { CategoriesInput } from '@app/common/services/product/inputs/get/get-categories-input';
-import { PrismaService } from '@app/database-products';
+import { PrismaService } from '@app/database';
 import { Injectable } from '@nestjs/common';
 import { nanoid } from 'nanoid';
 import { v4 } from 'uuid';
