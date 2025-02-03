@@ -10,15 +10,13 @@ ARG NODE_ENV
 
 # Install global dependencies
 RUN npm install -g pnpm
-RUN npm install -g dotenv-cli
-
+RUN npm install -g @nestjs/cli
 WORKDIR /app
 
 # Copy configuration files
 COPY pnpm-lock.yaml package.json nest-cli.json tsconfig*.json ./
 COPY apps ./apps
 COPY libs ./libs
-COPY .env.docker .env
 
 # Set build-time environment variables
 ENV DATABASE_URL=${DATABASE_URL}
