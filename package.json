@@ -1,5 +1,5 @@
 {
-  "name": "marketplace-services",
+  "name": "services",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -10,7 +10,7 @@
   },
   "packageManager": "pnpm@10.1.0",
   "scripts": {
-    "build": "nest build",
+    "build": "pnpm run migrate:db && nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
