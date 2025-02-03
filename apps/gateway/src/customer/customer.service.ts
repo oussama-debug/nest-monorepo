@@ -4,7 +4,7 @@ import { generateSubdomain } from '../common/constants/words';
 import { nanoid } from 'nanoid';
 import { Injectable } from '@nestjs/common';
 import { StripeService } from '@app/common/services/stripe';
-import { MembershipType, Workspace } from '@prisma/client';
+import { MembershipType, Workspace } from '@app/database';
 
 @Injectable()
 export class CustomerService {

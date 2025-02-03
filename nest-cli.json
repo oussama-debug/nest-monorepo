@@ -36,24 +36,6 @@
         "tsConfigPath": "apps/payments/tsconfig.app.json"
       }
     },
-    "database-gateway": {
-      "type": "library",
-      "root": "libs/database-gateway",
-      "entryFile": "index",
-      "sourceRoot": "libs/database-gateway/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/database-gateway/tsconfig.lib.json"
-      }
-    },
-    "database-products": {
-      "type": "library",
-      "root": "libs/database-products",
-      "entryFile": "index",
-      "sourceRoot": "libs/database-products/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/database-products/tsconfig.lib.json"
-      }
-    },
     "database": {
       "type": "library",
       "root": "libs/database",
