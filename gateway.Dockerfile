@@ -26,7 +26,7 @@ ENV BUS_PORT=${BUS_PORT}
 ENV NODE_ENV=${NODE_ENV}
 
 # Install dependencies and generate Prisma client
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 RUN pnpm build
 
 # production stage
