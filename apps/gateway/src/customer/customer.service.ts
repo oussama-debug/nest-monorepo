@@ -1,8 +1,4 @@
-import {
-  MembershipType,
-  PrismaService,
-  Workspace,
-} from 'libs/database-gateway/src';
+import { MembershipType, PrismaService, Workspace } from 'libs/database/src';
 import { CreateWorkspaceInput } from './inputs/input-create-workspace';
 import { generateSubdomain } from '../common/constants/words';
 import { nanoid } from 'nanoid';

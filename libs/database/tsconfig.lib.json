@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "../../dist/libs/database",
+    "plugins": [
+      {
+        "name": "gql.tada/ts-plugin",
+        "schema": "./prisma/schema.graphql",
+        "tadaOutputLocation": "./src/graphql.d.ts"
+      }
+    ]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+}

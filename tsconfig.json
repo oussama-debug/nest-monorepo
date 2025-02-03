@@ -18,10 +18,8 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/database-gateway": ["libs/database-gateway/src"],
-      "@app/database-gateway/*": ["libs/database-gateway/src/*"],
-      "@app/database-products": ["libs/database-products/src"],
-      "@app/database-products/*": ["libs/database-products/src/*"],
+      "@app/database": ["libs/database/src"],
+      "@app/database/*": ["libs/database/src/*"],
       "@app/common": ["libs/common/src"],
       "@app/common/*": ["libs/common/src/*"],
       "@app/storage": ["libs/storage/src"],

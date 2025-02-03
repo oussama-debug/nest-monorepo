@@ -11,8 +11,8 @@ async function bootstrap() {
     {
       transport: Transport.REDIS,
       options: {
-        host: process.env.GATEWAY_BUS_HOST,
-        port: parseInt(process.env.GATEWAY_BUS_PORT || '6379'),
+        host: process.env.BUS_HOST,
+        port: parseInt(process.env.BUS_PORT || '6379'),
         retryAttempts: 5,
         retryDelay: 1000,
       },

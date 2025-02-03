@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String         @id @default(uuid()) @db.Uuid
+  createdAt           DateTime       @default(now()) @db.Timestamptz
+  username            String         @unique
+  password            String
+  country             String         @default("CA")
+  stripeCustomerId    String?
+  hasVerifiedIdentity Boolean        @default(false)
+  isOnboarded         Boolean        @default(false)
+  onboardingStep      OnboardingType @default(setup_store)
+  userType            UserType       @default(business)
+
+  memberships Membership[]
+
+  @@map("users")
+}
+
+model Membership {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt
+
+  roles MembershipType[] @default([owner])
+
+  user        User?      @relation(fields: [userId], references: [id])
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+  userId      String?    @db.Uuid
+  workspaceId String?    @db.Uuid
+
+  @@map("memberships")
+}
+
+model Workspace {
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+
+  createdAt DateTime @default(now()) @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt
+  subdomain String   @unique
+  reference String   @unique
+  services  String[]
+
+  stripe_account_id             String?
+  stripe_account_verified       Boolean @default(false)
+  stripe_account_disabled       Boolean @default(false)
+  stripe_account_disable_reason String?
+
+  memberships Membership[]
+
+  @@map("workspaces")
+}
+
+enum UserType {
+  customer
+  business
+}
+
+enum MembershipType {
+  owner
+  member
+  viewer
+}
+
+enum OnboardingType {
+  setup_store
+  setup_profile
+}
+
+// # ----------------- products
+enum chargeType {
+  one_time
+  recurring
+}
+
+enum packageType {
+  flat
+  package
+}
+
+model Category {
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now()) @db.Timestamptz
+  workspaceId String   @db.Uuid
+  userId      String   @db.Uuid
+
+  name        String
+  description String  @db.Text
+  published   Boolean @default(false)
+  slug        String  @unique
+
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          String    @id @default(uuid()) @db.Uuid
+  createdAt   DateTime  @default(now()) @db.Timestamptz
+  workspaceId String    @db.Uuid
+  userId      String    @db.Uuid
+  slug        String    @unique
+  name        String
+  image       String
+  description String
+  published   Boolean   @default(false)
+  pricings    Pricing[]
+
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?   @db.Uuid
+
+  @@index([workspaceId])
+  @@index([userId])
+  @@map("products")
+}
+
+model Pricing {
+  id           String      @id @default(uuid()) @db.Uuid
+  amount       String
+  charge_type  chargeType  @default(one_time)
+  package_type packageType @default(flat)
+  workspaceId  String      @db.Uuid
+  userId       String      @db.Uuid
+  currency     String
+
+  createdAt DateTime @default(now()) @db.Timestamptz
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.Uuid
+
+  fees PricingFee[]
+
+  @@index([workspaceId])
+  @@index([userId])
+  @@map("pricings")
+}
+
+model PricingFee {
+  id        String    @id @default(uuid()) @db.Uuid
+  createdAt DateTime  @default(now()) @db.Timestamptz
+  pricings  Pricing[]
+
+  name String
+
+  description String?
+  total       Decimal @default(0.0)
+
+  @@map("pricing_fees")
+}

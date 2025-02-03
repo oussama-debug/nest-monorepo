@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'libs/database-gateway/src';
+import { PrismaService } from 'libs/database/src';
 
 @Injectable()
 export class WebhookService {

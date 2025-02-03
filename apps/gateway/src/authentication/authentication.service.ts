@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService, User } from 'libs/database-gateway/src';
+import { PrismaService, User } from 'libs/database/src';
 import { CreateUserInput } from './inputs/input-create-user';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';

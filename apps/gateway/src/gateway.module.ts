@@ -11,7 +11,7 @@ import { ProductModule } from './product/product.module';
 import { StorageModule } from './storage/storage.module';
 import { WebhookController } from './webhook.controller';
 import { StripeService } from '@app/common/services/stripe';
-import { PrismaService } from 'libs/database-gateway/src';
+import { PrismaService } from 'libs/database/src';
 import { WebhookService } from './webhook.service';
 
 @Module({
@@ -49,7 +49,7 @@ import { WebhookService } from './webhook.service';
           useFactory: async (configService: ConfigService) => ({
             transport: Transport.REDIS,
             options: {
-              url: configService.getOrThrow('GATEWAY_BUS_URL') as string,
+              url: configService.getOrThrow('BUS_URL') as string,
               retryAttempts: 5,
               retryDelay: 1000,
             },

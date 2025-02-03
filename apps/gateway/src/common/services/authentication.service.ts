@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { AuthenticationService } from 'apps/gateway/src/authentication/authentication.service';
-import { User } from 'libs/database-gateway/src';
+import { User } from 'libs/database/src';
 
 @Injectable()
 export class JwtGQLAuthenticationService {

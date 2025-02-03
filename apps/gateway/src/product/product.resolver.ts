@@ -15,7 +15,7 @@ import {
 } from '@app/common/graphql/gateway/models/product.model';
 import { CustomerService } from 'apps/gateway/src/customer/customer.service';
 import { InvalidWorkspaceGQLError } from '@app/common/graphql/gateway/errors/invalid-workspace';
-import { User, Workspace } from '@app/database-gateway';
+import { User, Workspace } from '@app/database';
 
 @Resolver()
 export class ProductResolver {
