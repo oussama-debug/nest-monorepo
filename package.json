@@ -22,7 +22,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/marketplace-services/test/jest-e2e.json",
-    "migrate:db": "cd libs/database && pnpm dlx db push && pnpm dlx prisma generate"
+    "migrate:db": "cd libs/database && pnpm dlx prisma db push && pnpm dlx prisma generate"
   },
   "dependencies": {
     "@apollo/server": "^4.11.3",
