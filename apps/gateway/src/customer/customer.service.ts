@@ -1,9 +1,10 @@
-import { MembershipType, PrismaService, Workspace } from 'libs/database/src';
+import { PrismaService } from 'libs/database/src';
 import { CreateWorkspaceInput } from './inputs/input-create-workspace';
 import { generateSubdomain } from '../common/constants/words';
 import { nanoid } from 'nanoid';
 import { Injectable } from '@nestjs/common';
 import { StripeService } from '@app/common/services/stripe';
+import { MembershipType, Workspace } from '@prisma/client';
 
 @Injectable()
 export class CustomerService {
